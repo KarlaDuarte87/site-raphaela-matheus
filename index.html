@@ -209,6 +209,7 @@
             object-fit: cover;
             object-position: center;
             display: block;
+            cursor: zoom-in;
             background: linear-gradient(135deg, #e3ebe3, #c5d5c5);
         }
         .place-card img.place-card-photo--portrait {
@@ -284,6 +285,100 @@
         }
         @media (max-width: 767px) {
             .place-gallery-btn { opacity: 1; }
+        }
+        .photo-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .photo-lightbox.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .photo-lightbox__backdrop {
+            position: absolute;
+            inset: 0;
+            border: 0;
+            background: rgba(37, 48, 37, 0.94);
+            cursor: zoom-out;
+        }
+        .photo-lightbox__figure {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            max-width: min(96vw, 920px);
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .photo-lightbox__img {
+            max-width: 100%;
+            max-height: calc(88vh - 2.5rem);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.65rem;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+            background: #253025;
+        }
+        .photo-lightbox__caption {
+            color: #e3ebe3;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-align: center;
+        }
+        .photo-lightbox__counter {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            margin: 0;
+            color: rgba(252, 251, 250, 0.72);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .photo-lightbox__close,
+        .photo-lightbox__nav {
+            position: absolute;
+            z-index: 2;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(252, 251, 250, 0.94);
+            color: #374937;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-lightbox__close {
+            top: 1rem;
+            right: 1rem;
+            width: 2.35rem;
+            height: 2.35rem;
+        }
+        .photo-lightbox__nav {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.35rem;
+            height: 2.35rem;
+        }
+        .photo-lightbox__nav--prev { left: 1rem; }
+        .photo-lightbox__nav--next { right: 1rem; }
+        .photo-lightbox__nav.is-hidden,
+        .photo-lightbox__counter.is-hidden {
+            display: none;
         }
         .place-tooltip {
             font-family: 'Montserrat', sans-serif;
@@ -568,6 +663,24 @@
     </footer>
     </div>
 
+    <div id="photoLightbox" class="photo-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visualizar foto">
+        <button type="button" class="photo-lightbox__backdrop" aria-label="Fechar"></button>
+        <button type="button" class="photo-lightbox__close" aria-label="Fechar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <button type="button" class="photo-lightbox__nav photo-lightbox__nav--prev is-hidden" aria-label="Foto anterior">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <figure class="photo-lightbox__figure">
+            <img class="photo-lightbox__img" src="" alt="">
+            <figcaption class="photo-lightbox__caption"></figcaption>
+        </figure>
+        <button type="button" class="photo-lightbox__nav photo-lightbox__nav--next is-hidden" aria-label="Próxima foto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <p class="photo-lightbox__counter is-hidden" aria-live="polite"></p>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         const menuBtn = document.getElementById('menuBtn');
@@ -618,6 +731,69 @@
             window.addEventListener('scroll', sync, { passive: true });
             window.addEventListener('resize', sync, { passive: true });
             sync();
+        })();
+
+        (function initPhotoLightbox() {
+            const lightbox = document.getElementById('photoLightbox');
+            if (!lightbox) return;
+
+            const imgEl = lightbox.querySelector('.photo-lightbox__img');
+            const captionEl = lightbox.querySelector('.photo-lightbox__caption');
+            const counterEl = lightbox.querySelector('.photo-lightbox__counter');
+            const prevBtn = lightbox.querySelector('.photo-lightbox__nav--prev');
+            const nextBtn = lightbox.querySelector('.photo-lightbox__nav--next');
+            let photos = [];
+            let index = 0;
+            let title = '';
+
+            function render() {
+                imgEl.src = photos[index];
+                imgEl.alt = photos.length > 1 ? `${title} — foto ${index + 1}` : title;
+                captionEl.textContent = title;
+                const multi = photos.length > 1;
+                prevBtn.classList.toggle('is-hidden', !multi);
+                nextBtn.classList.toggle('is-hidden', !multi);
+                counterEl.classList.toggle('is-hidden', !multi);
+                counterEl.textContent = multi ? `${index + 1} / ${photos.length}` : '';
+            }
+
+            function close() {
+                lightbox.classList.remove('is-open');
+                lightbox.hidden = true;
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                imgEl.removeAttribute('src');
+            }
+
+            function open(photoList, startIndex, name) {
+                photos = photoList;
+                index = startIndex;
+                title = name;
+                render();
+                lightbox.hidden = false;
+                lightbox.setAttribute('aria-hidden', 'false');
+                lightbox.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                lightbox.querySelector('.photo-lightbox__close').focus();
+            }
+
+            function goTo(nextIndex) {
+                index = (nextIndex + photos.length) % photos.length;
+                render();
+            }
+
+            lightbox.querySelector('.photo-lightbox__backdrop').addEventListener('click', close);
+            lightbox.querySelector('.photo-lightbox__close').addEventListener('click', close);
+            prevBtn.addEventListener('click', () => goTo(index - 1));
+            nextBtn.addEventListener('click', () => goTo(index + 1));
+            document.addEventListener('keydown', (event) => {
+                if (lightbox.hidden) return;
+                if (event.key === 'Escape') close();
+                if (event.key === 'ArrowLeft') goTo(index - 1);
+                if (event.key === 'ArrowRight') goTo(index + 1);
+            });
+
+            window.openPhotoLightbox = open;
         })();
 
         const places = [
@@ -854,6 +1030,30 @@
                     </div>`;
             }
 
+            function initPhotoTriggers(root) {
+                root.querySelectorAll('.place-card').forEach((card) => {
+                    const id = card.dataset.place;
+                    const place = places.find((p) => p.id === id);
+                    if (!place) return;
+
+                    const photos = placePhotos(place);
+                    if (!photos.length) return;
+
+                    card.querySelectorAll('.place-card-gallery-track img, .place-card > img').forEach((img) => {
+                        img.addEventListener('click', (event) => {
+                            event.stopPropagation();
+                            const gallery = card.querySelector('.place-card-gallery');
+                            let startIndex = 0;
+                            if (gallery) {
+                                const track = gallery.querySelector('.place-card-gallery-track');
+                                startIndex = Math.round(track.scrollLeft / track.clientWidth);
+                            }
+                            window.openPhotoLightbox?.(photos, startIndex, place.name);
+                        });
+                    });
+                });
+            }
+
             function initPlaceGalleries(root) {
                 root.querySelectorAll('.place-card-gallery').forEach((gallery) => {
                     const track = gallery.querySelector('.place-card-gallery-track');
@@ -970,13 +1170,14 @@
                     });
                     card.addEventListener('mouseleave', () => markers[id]?.closeTooltip());
                     card.addEventListener('click', (event) => {
-                        if (event.target.closest('a, .place-card-gallery')) return;
+                        if (event.target.closest('a, .place-card-gallery, img')) return;
                         if (place.lat == null) return;
                         map.flyTo([place.lat, place.lng], 15, { duration: 0.6 });
                         markers[id]?.openTooltip();
                     });
                 });
                 initPlaceGalleries(listEl);
+                initPhotoTriggers(listEl);
                 const mapped = items.filter((p) => p.lat != null);
                 if (mapped.length) map.fitBounds(L.latLngBounds(mapped.map((p) => [p.lat, p.lng])).pad(0.35));
             }
