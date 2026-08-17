@@ -64,6 +64,11 @@
             color: #374937;
         }
         .site-nav a:hover { color: #c5a059; }
+        .nav-logo {
+            height: 1.25rem;
+            width: auto;
+            display: block;
+        }
 
         /* Foto fixa no viewport — o conteúdo passa por cima, como janela */
         .page-wallpaper {
@@ -151,7 +156,9 @@
     <div class="page-content">
     <header class="site-nav" id="siteNav">
         <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 px-4 py-4">
-            <a href="#home" class="font-serif italic text-lg tracking-normal text-olive-800">R & M</a>
+            <a href="#home" class="shrink-0">
+                <img class="nav-logo" src="assets/logo2.png" alt="Raphaela & Matheus" width="913" height="456" decoding="async">
+            </a>
             <nav class="hidden md:flex items-center gap-6" id="desktopNav">
                 <a href="#casal" class="transition">O casal</a>
                 <a href="#padrinhos" class="transition">Padrinhos</a>
