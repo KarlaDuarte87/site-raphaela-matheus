@@ -93,6 +93,20 @@
             background:
                 linear-gradient(180deg, rgba(37, 48, 37, 0.38) 0%, rgba(37, 48, 37, 0.12) 42%, rgba(37, 48, 37, 0.42) 100%);
         }
+        .page-wallpaper--vivaro {
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        .page-wallpaper--vivaro img {
+            object-position: center 60%;
+        }
+        .page-wallpaper--vivaro::after {
+            background:
+                linear-gradient(180deg, rgba(40, 32, 22, 0.28) 0%, rgba(40, 32, 22, 0.12) 45%, rgba(40, 32, 22, 0.4) 100%);
+        }
+        body.is-vivaro-scene .page-wallpaper--vivaro {
+            opacity: 1;
+        }
         .page-content {
             position: relative;
             z-index: 1;
@@ -130,6 +144,7 @@
             line-height: 1.85;
         }
         .hero-welcome p + p { margin-top: 1.15rem; }
+        #casal .hero-welcome { margin-top: 0; }
         .hero-sign {
             margin-top: 1.75rem;
             font-family: 'Cormorant Garamond', serif;
@@ -141,6 +156,26 @@
             width: 3.5rem;
             height: 1px;
             background: rgba(197, 160, 89, 0.85);
+        }
+        .couple-photo {
+            width: 14rem;
+            height: 14rem;
+            margin: 0 auto 2.5rem;
+            padding: 0.35rem;
+            border-radius: 9999px;
+            background: #fcfbfa;
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            box-shadow:
+                0 0 0 4px #fcfbfa,
+                0 0 0 5px rgba(197, 160, 89, 0.35),
+                0 14px 32px rgba(55, 73, 55, 0.12);
+        }
+        .couple-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 9999px;
+            display: block;
         }
         .photo-window {
             height: min(62vh, 560px);
@@ -207,12 +242,84 @@
             border-color: #445b44;
             color: #fff;
         }
+
+        .pix-card {
+            margin-top: 2.5rem;
+            background: #fcfbfa;
+            border: 1px solid #e3ebe3;
+            border-radius: 1.35rem;
+            padding: 2.25rem 1.6rem 2rem;
+            box-shadow: 0 16px 40px rgba(55, 73, 55, 0.08);
+        }
+        .pix-qr-frame {
+            width: min(100%, 280px);
+            margin: 1.6rem auto 0;
+            padding: 0.85rem;
+            background: #fcfbfa;
+            border: 1px solid rgba(197, 160, 89, 0.55);
+            box-shadow: inset 0 0 0 6px #fcfbfa, inset 0 0 0 7px rgba(197, 160, 89, 0.35);
+        }
+        .pix-qr-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .pix-meta {
+            margin-top: 1.75rem;
+            text-align: left;
+            border-top: 1px dashed #c5d5c5;
+            padding-top: 1.35rem;
+            display: grid;
+            gap: 0.85rem;
+        }
+        .pix-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .pix-row span {
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #759375;
+        }
+        .pix-row strong {
+            font-size: 0.92rem;
+            color: #2d3b2d;
+            font-weight: 500;
+            text-align: right;
+        }
+        .pix-copy {
+            margin-top: 1.35rem;
+            width: 100%;
+            border: 1px solid #445b44;
+            background: #445b44;
+            color: #fff;
+            border-radius: 999px;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .pix-copy:hover {
+            background: #374937;
+            border-color: #374937;
+        }
+        .pix-copy.is-copied {
+            background: #587458;
+            border-color: #587458;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
     <div class="page-wallpaper" aria-hidden="true">
         <img src="assets/foto1.jpeg" alt="" width="1200" height="1600" decoding="async">
+    </div>
+    <div class="page-wallpaper page-wallpaper--vivaro" aria-hidden="true">
+        <img src="assets/img2.jpeg" alt="" width="1600" height="900" decoding="async">
     </div>
 
     <div class="page-content">
@@ -226,7 +333,6 @@
                 <a href="#padrinhos" class="transition">Padrinhos</a>
                 <a href="#recepcao" class="transition">Recepção</a>
                 <a href="#presentes" class="transition">Presentes</a>
-                <a href="#rsvp" class="transition">Presença</a>
                 <a href="#hospedagem" class="transition">Onde ficar</a>
             </nav>
             <button type="button" id="menuBtn" class="md:hidden text-olive-800" aria-label="Abrir menu">
@@ -240,7 +346,6 @@
             <a href="#padrinhos" class="block text-olive-700">Padrinhos</a>
             <a href="#recepcao" class="block text-olive-700">Recepção</a>
             <a href="#presentes" class="block text-olive-700">Presentes</a>
-            <a href="#rsvp" class="block text-olive-700">Presença</a>
             <a href="#hospedagem" class="block text-olive-700">Onde ficar</a>
         </div>
     </header>
@@ -254,8 +359,8 @@
 
         <div class="hero-welcome">
             <p>Criamos esse site para compartilhar com vocês os detalhes da organização do nosso casamento.</p>
-            <p>Estamos muito felizes e contamos com a presença de todos no nosso grande dia! Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc. Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua Presença” e preenchendo os dados necessários.</p>
-            <p>Para nos presentear, escolha qualquer item da Lista de Casamento, seja um item de algum dos sites, lojas físicas, ou então vocês podem utilizar a opção de cotas.</p>
+            <p>Estamos muito felizes e contamos com a presença de todos no nosso grande dia! Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc.</p>
+            <p>Para nos presentear, o Pix na Lista de Presentes é o nosso jeito simples de receber o carinho de vocês — no valor que fizer sentido para cada um.</p>
             <p>Fiquem à vontade!</p>
             <p>Aguardamos vocês no nosso grande dia!</p>
         </div>
@@ -264,15 +369,21 @@
 
     <div class="photo-window" aria-hidden="true"></div>
 
-    <section id="casal" class="py-24 px-4 bg-gradient-to-b from-[#e8eee6] via-olive-50 to-cream">
+    <section id="casal" class="py-24 px-4 bg-olive-50 border-t border-olive-100">
         <div class="max-w-3xl mx-auto text-center">
             <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Nossa história</span>
             <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-8">O casal</h2>
-            <img src="assets/foto2.png" alt="Raphaela e Matheus" class="w-56 h-56 object-cover rounded-full mx-auto mb-8 shadow-xl border-4 border-white">
-            <p class="text-olive-700 leading-relaxed">
-                Foi em um café, em uma tarde ensolarada, que nossos olhares se encontraram pela primeira vez.
-            </p>
-            <p class="text-olive-600 text-sm mt-6 italic">Textos e fotos desta seção ainda serão preenchidos.</p>
+            <div class="couple-photo">
+                <img src="assets/foto2.png" alt="Raphaela e Matheus" width="512" height="512" decoding="async">
+            </div>
+            <div class="gold-line mx-auto mb-10" aria-hidden="true"></div>
+            <div class="hero-welcome">
+                <p>Foi numa estação de trem, debaixo de chuva, que tudo começou. Ele tinha perdido a conexão; ela estava atrasada para o próprio embarque. Dividiram o mesmo banco de espera por quase duas horas — e um guarda-chuva que só um dos dois lembrou de trazer.</p>
+                <p>A conversa começou por acaso e não quis mais parar. Descobriram que moravam a três quarteirões de distância um do outro, sem nunca terem se cruzado antes. No dia seguinte, “por coincidência”, os dois apareceram na mesma cafeteria da esquina.</p>
+                <p>Dali em diante, foi uma sequência de pequenas aventuras: mapas malfeitos em viagens de última hora, uma tentativa desastrosa de cozinhar juntos pela primeira vez (o alarme de incêndio nunca vai deixar esquecer), noites inteiras de conversa que terminavam sempre com “só mais cinco minutinhos”.</p>
+                <p>Vieram os desafios — mudanças de cidade, fases difíceis, distância por um tempo — mas nada que abalasse o que já estava construído. A certeza foi crescendo devagar, como essas coisas boas costumam crescer: sem pressa, mas sem volta.</p>
+            </div>
+            <p class="hero-sign">Hoje, o guarda-chuva daquele dia ainda existe.</p>
         </div>
     </section>
 
@@ -298,11 +409,11 @@
             <h2 class="text-4xl md:text-5xl font-serif">Buffet Vivaro</h2>
             <p class="text-olive-100 text-sm">Salão Florença<br>Av. Virgílio Manilia, 21784 — Jardim Ouro Cola — Maringá</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mt-8">
-                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/10">
+                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/15">
                     <h3 class="font-serif text-2xl mb-2">Cerimônia</h3>
                     <p class="text-sm">16h30</p>
                 </div>
-                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/10">
+                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/15">
                     <h3 class="font-serif text-2xl mb-2">Padrinhos</h3>
                     <p class="text-sm">Chegada às 16h00</p>
                 </div>
@@ -311,26 +422,40 @@
         </div>
     </section>
 
-    <div class="photo-window" aria-hidden="true"></div>
+    <div class="photo-window" data-scene="vivaro" aria-hidden="true"></div>
 
     <section id="presentes" class="py-24 px-4 bg-olive-50 border-t border-olive-100">
         <div class="max-w-xl mx-auto text-center">
             <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Para nos presentear</span>
             <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-6">Lista de presentes</h2>
-            <p class="text-olive-700 leading-relaxed">A lista ainda está sendo organizada. Em breve vocês poderão escolher um item ou contribuir com uma cota.</p>
+            <p class="text-olive-700 leading-relaxed">A presença de vocês já é o nosso maior presente. Se quiserem contribuir para o nosso começo, o Pix abaixo é o nosso jeito simples de receber esse carinho — no valor que fizer sentido para cada um.</p>
+
+            <div class="pix-card">
+                <p class="text-xs tracking-[0.28em] uppercase text-olive-500">Pix</p>
+                <div class="gold-line mx-auto mt-3" aria-hidden="true"></div>
+                <p class="text-olive-600 text-sm mt-4 leading-relaxed">Aponte a câmera do banco e informe o valor na hora de pagar.</p>
+
+                <div class="pix-qr-frame">
+                    <img src="assets/pix-qr.png" alt="QR Code Pix para presentear Raphaela e Matheus" width="682" height="682" decoding="async">
+                </div>
+
+                <div class="pix-meta">
+                    <div class="pix-row">
+                        <span>Nome</span>
+                        <strong>Matheus Winter</strong>
+                    </div>
+                    <div class="pix-row">
+                        <span>Chave Pix</span>
+                        <strong id="pixKey">020.694.090-40</strong>
+                    </div>
+                </div>
+
+                <button type="button" class="pix-copy" id="copyPixBtn" data-pix="02069409040">Copiar chave Pix</button>
+            </div>
         </div>
     </section>
 
-    <section id="rsvp" class="py-24 px-4 bg-cream text-center">
-        <div class="max-w-xl mx-auto">
-            <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Responda até 01/10</span>
-            <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-6">Confirme sua presença</h2>
-            <p class="text-olive-700 mb-8">O formulário do convite já está no ar. Em seguida trazemos a mesma confirmação para cá.</p>
-            <span class="inline-block px-8 py-3 rounded-full bg-olive-600/80 text-white text-xs tracking-[0.18em] uppercase">Em breve neste site</span>
-        </div>
-    </section>
-
-    <section id="hospedagem" class="py-24 px-4 bg-olive-50 border-t border-olive-100">
+    <section id="hospedagem" class="py-24 px-4 bg-cream border-t border-olive-100">
         <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-2xl mx-auto">
                 <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Dicas para o grande dia</span>
@@ -365,6 +490,48 @@
         mobileMenu.querySelectorAll('a').forEach((link) => {
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
+
+        (function initPixCopy() {
+            const btn = document.getElementById('copyPixBtn');
+            if (!btn) return;
+            const original = btn.textContent;
+            btn.addEventListener('click', async () => {
+                const key = btn.dataset.pix || '';
+                try {
+                    await navigator.clipboard.writeText(key);
+                } catch {
+                    const field = document.createElement('textarea');
+                    field.value = key;
+                    document.body.appendChild(field);
+                    field.select();
+                    document.execCommand('copy');
+                    field.remove();
+                }
+                btn.textContent = 'Chave copiada';
+                btn.classList.add('is-copied');
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.classList.remove('is-copied');
+                }, 2200);
+            });
+        })();
+
+        (function initVivaroWallpaper() {
+            const scenes = document.querySelectorAll('[data-scene="vivaro"]');
+            if (!scenes.length) return;
+
+            function sync() {
+                const mid = window.innerHeight * 0.45;
+                const active = [...scenes].some((el) => {
+                    const rect = el.getBoundingClientRect();
+                    return rect.top < window.innerHeight * 0.82 && rect.bottom > mid * 0.35;
+                });
+                document.body.classList.toggle('is-vivaro-scene', active);
+            }
+            window.addEventListener('scroll', sync, { passive: true });
+            window.addEventListener('resize', sync, { passive: true });
+            sync();
+        })();
 
         const places = [
             {
