@@ -214,6 +214,77 @@
         .place-card img.place-card-photo--portrait {
             object-position: top center;
         }
+        .place-card-gallery {
+            position: relative;
+            height: 220px;
+            background: linear-gradient(135deg, #e3ebe3, #c5d5c5);
+        }
+        .place-card-gallery-track {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .place-card-gallery-track::-webkit-scrollbar {
+            display: none;
+        }
+        .place-card-gallery-track img {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+        }
+        .place-gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.85rem;
+            height: 1.85rem;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(252, 251, 250, 0.92);
+            color: #374937;
+            box-shadow: 0 4px 14px rgba(55, 73, 55, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 2;
+        }
+        .place-card-gallery:hover .place-gallery-btn,
+        .place-card-gallery:focus-within .place-gallery-btn {
+            opacity: 1;
+        }
+        .place-gallery-btn--prev { left: 0.55rem; }
+        .place-gallery-btn--next { right: 0.55rem; }
+        .place-gallery-dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0.55rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.35rem;
+            z-index: 2;
+        }
+        .place-gallery-dot {
+            width: 0.42rem;
+            height: 0.42rem;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(252, 251, 250, 0.55);
+            cursor: pointer;
+            padding: 0;
+        }
+        .place-gallery-dot.is-active {
+            background: #fcfbfa;
+            transform: scale(1.15);
+        }
+        @media (max-width: 767px) {
+            .place-gallery-btn { opacity: 1; }
+        }
         .place-tooltip {
             font-family: 'Montserrat', sans-serif;
             border: 0;
@@ -556,7 +627,15 @@
                 name: 'Buffet Vivaro',
                 label: 'Cerimônia e recepção',
                 address: 'Av. Virgílio Manilia, 21784 — Jardim Ouro Cola, Maringá',
-                photo: 'assets/buffet-vivaro.webp',
+                photos: [
+                    'assets/buffet-vivaro.webp',
+                    'assets/hoteis/vivaro-1.webp',
+                    'assets/hoteis/vivaro-2.webp',
+                    'assets/hoteis/vivaro-3.webp',
+                    'assets/hoteis/vivaro-4.webp',
+                    'assets/hoteis/vivaro-5.webp',
+                    'assets/hoteis/vivaro-6.webp'
+                ],
                 lat: -23.4113703,
                 lng: -51.9895337,
                 maps: 'https://www.google.com/maps/search/?api=1&query=Buffet+Vivaro+Av+Virgilio+Manilia+21784+Maringa'
@@ -567,7 +646,13 @@
                 name: 'Transamerica Executive Maringá',
                 label: 'Hospedagem · 9 min do Vivaro',
                 address: 'Rodovia PR-317, km 5, 5428 — Maringá',
-                photo: 'assets/Transamérica-Executive-Maringá.jpg',
+                photos: [
+                    'assets/hoteis/Transamérica-Executive-Maringá.jpg',
+                    'assets/hoteis/trasnsamérica-2.jpg',
+                    'assets/hoteis/trasnsamérica-3.jpg',
+                    'assets/hoteis/trasnsamérica-4.jpg',
+                    'assets/hoteis/trasnsamérica-5.jpg'
+                ],
                 phone: '(44) 3123-9800',
                 lat: -23.4655,
                 lng: -51.9316,
@@ -580,7 +665,15 @@
                 name: 'Thomasi Hotel',
                 label: 'Hospedagem · 16 min do Vivaro',
                 address: 'Avenida Colombo, 3531 — Zona 10, Maringá',
-                photo: 'assets/hotel-thomasi.jpg',
+                photos: [
+                    'assets/hoteis/hotel-thomasi.jpg',
+                    'assets/hoteis/thomasi-1.jpg',
+                    'assets/hoteis/thomasi-2.jpg',
+                    'assets/hoteis/thomasi-3.jpg',
+                    'assets/hoteis/thomasi-4.jpg',
+                    'assets/hoteis/thomasi-5.jpg',
+                    'assets/hoteis/thomasi-6.jpg'
+                ],
                 phone: '(44) 3032-0400',
                 lat: -23.4187946,
                 lng: -51.9165012,
@@ -593,7 +686,7 @@
                 name: 'HUS',
                 label: 'Hospedagem · 14 min do Vivaro',
                 address: 'Av. Adv. Horácio Raccanello Filho, 5105 — Zona 07, Maringá',
-                photo: 'assets/hus-hotel.jpg',
+                photo: 'assets/hoteis/hus-hotel.jpg',
                 phone: '(44) 2018-2018',
                 lat: -23.4184198,
                 lng: -51.9332652,
@@ -697,10 +790,78 @@
                 return `tel:${String(phone).replace(/\D/g, '')}`;
             }
 
+            function placePhotos(place) {
+                if (Array.isArray(place.photos) && place.photos.length) return place.photos;
+                if (place.photo) return [place.photo];
+                return [];
+            }
+
+            function photoBlock(place) {
+                const photos = placePhotos(place);
+                const portraitClass = place.type === 'profissional' ? ' place-card-photo--portrait' : '';
+
+                if (!photos.length) return '<div class="place-card-photo"></div>';
+                if (photos.length === 1) {
+                    return `<img src="${photos[0]}" alt="${place.name}" class="${portraitClass.trim()}">`;
+                }
+
+                const slides = photos.map((src, index) =>
+                    `<img src="${src}" alt="${place.name} — foto ${index + 1}" class="${portraitClass.trim()}">`
+                ).join('');
+                const dots = photos.map((_, index) =>
+                    `<button type="button" class="place-gallery-dot${index === 0 ? ' is-active' : ''}" data-index="${index}" aria-label="Foto ${index + 1}"></button>`
+                ).join('');
+
+                return `
+                    <div class="place-card-gallery">
+                        <div class="place-card-gallery-track">${slides}</div>
+                        <button type="button" class="place-gallery-btn place-gallery-btn--prev" aria-label="Foto anterior">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button type="button" class="place-gallery-btn place-gallery-btn--next" aria-label="Próxima foto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                        <div class="place-gallery-dots">${dots}</div>
+                    </div>`;
+            }
+
+            function initPlaceGalleries(root) {
+                root.querySelectorAll('.place-card-gallery').forEach((gallery) => {
+                    const track = gallery.querySelector('.place-card-gallery-track');
+                    const dots = [...gallery.querySelectorAll('.place-gallery-dot')];
+                    let index = 0;
+
+                    function goTo(nextIndex) {
+                        index = (nextIndex + dots.length) % dots.length;
+                        track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+                        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+                    }
+
+                    gallery.querySelector('.place-gallery-btn--prev')?.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        goTo(index - 1);
+                    });
+                    gallery.querySelector('.place-gallery-btn--next')?.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        goTo(index + 1);
+                    });
+                    dots.forEach((dot) => {
+                        dot.addEventListener('click', (event) => {
+                            event.stopPropagation();
+                            goTo(Number(dot.dataset.index));
+                        });
+                    });
+                    track.addEventListener('scroll', () => {
+                        const next = Math.round(track.scrollLeft / track.clientWidth);
+                        if (next === index) return;
+                        index = next;
+                        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+                    }, { passive: true });
+                });
+            }
+
             function cardHtml(place) {
-                const photo = place.photo
-                    ? `<img src="${place.photo}" alt="${place.name}"${place.type === 'profissional' ? ' class="place-card-photo--portrait"' : ''}>`
-                    : `<div class="place-card-photo"></div>`;
+                const photo = photoBlock(place);
                 const prices = place.prices
                     ? `<ul class="mt-3 text-sm text-olive-700 space-y-1">${place.prices.map((p) => `<li>${p}</li>`).join('')}</ul>`
                     : '';
@@ -780,12 +941,13 @@
                     });
                     card.addEventListener('mouseleave', () => markers[id]?.closeTooltip());
                     card.addEventListener('click', (event) => {
-                        if (event.target.closest('a')) return;
+                        if (event.target.closest('a, .place-card-gallery')) return;
                         if (place.lat == null) return;
                         map.flyTo([place.lat, place.lng], 15, { duration: 0.6 });
                         markers[id]?.openTooltip();
                     });
                 });
+                initPlaceGalleries(listEl);
                 const mapped = items.filter((p) => p.lat != null);
                 if (mapped.length) map.fitBounds(L.latLngBounds(mapped.map((p) => [p.lat, p.lng])).pad(0.35));
             }
