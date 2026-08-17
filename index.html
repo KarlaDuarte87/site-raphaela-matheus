@@ -53,18 +53,17 @@
             left: 0;
             right: 0;
             z-index: 40;
-            transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
-        }
-        .site-nav.is-scrolled {
-            background: rgba(252, 251, 250, 0.94);
-            box-shadow: 0 8px 24px rgba(55, 73, 55, 0.08);
+            background: rgba(252, 251, 250, 0.96);
+            box-shadow: 0 8px 24px rgba(55, 73, 55, 0.06);
             backdrop-filter: blur(10px);
         }
         .site-nav a {
             letter-spacing: 0.16em;
             text-transform: uppercase;
             font-size: 0.68rem;
+            color: #374937;
         }
+        .site-nav a:hover { color: #c5a059; }
 
         /* Foto fixa no viewport — o conteúdo passa por cima, como janela */
         .page-wallpaper {
@@ -99,20 +98,38 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 1.5rem 4rem;
-            color: #fff;
-            background: transparent;
+            padding: 7.5rem 1.5rem 4.5rem;
+            color: #374937;
+            background: #fcfbfa;
             position: relative;
         }
-        .hero h1 {
-            margin-top: 0.85rem;
-            max-width: min(92vw, 560px);
-        }
-        .hero h1 img {
-            width: 100%;
+        .hero-logo {
+            width: min(92vw, 420px);
             height: auto;
             display: block;
-            filter: brightness(0) invert(1) drop-shadow(0 2px 18px rgba(0, 0, 0, 0.28));
+            margin: 0 auto;
+        }
+        .hero-date {
+            margin-top: 0.35rem;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.28em;
+            font-size: 0.95rem;
+            color: #587458;
+        }
+        .hero-welcome {
+            max-width: 42rem;
+            margin: 2.75rem auto 0;
+            color: #445b44;
+            font-size: 0.95rem;
+            line-height: 1.85;
+        }
+        .hero-welcome p + p { margin-top: 1.15rem; }
+        .hero-sign {
+            margin-top: 1.75rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.45rem;
+            color: #2d3b2d;
         }
         .gold-line {
             width: 3.5rem;
@@ -134,16 +151,16 @@
     <div class="page-content">
     <header class="site-nav" id="siteNav">
         <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 px-4 py-4">
-            <a href="#home" class="font-serif italic text-lg tracking-normal text-white site-nav-brand">R & M</a>
-            <nav class="hidden md:flex items-center gap-6 text-white/90" id="desktopNav">
-                <a href="#casal" class="hover:text-gold transition">O casal</a>
-                <a href="#padrinhos" class="hover:text-gold transition">Padrinhos</a>
-                <a href="#recepcao" class="hover:text-gold transition">Recepção</a>
-                <a href="#presentes" class="hover:text-gold transition">Presentes</a>
-                <a href="#rsvp" class="hover:text-gold transition">Presença</a>
-                <a href="#recados" class="hover:text-gold transition">Recados</a>
+            <a href="#home" class="font-serif italic text-lg tracking-normal text-olive-800">R & M</a>
+            <nav class="hidden md:flex items-center gap-6" id="desktopNav">
+                <a href="#casal" class="transition">O casal</a>
+                <a href="#padrinhos" class="transition">Padrinhos</a>
+                <a href="#recepcao" class="transition">Recepção</a>
+                <a href="#presentes" class="transition">Presentes</a>
+                <a href="#rsvp" class="transition">Presença</a>
+                <a href="#recados" class="transition">Recados</a>
             </nav>
-            <button type="button" id="menuBtn" class="md:hidden text-white" aria-label="Abrir menu">
+            <button type="button" id="menuBtn" class="md:hidden text-olive-800" aria-label="Abrir menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16" />
                 </svg>
@@ -160,18 +177,23 @@
     </header>
 
     <section id="home" class="hero">
-        <span class="text-[11px] tracking-[0.38em] uppercase opacity-90">1º de novembro de 2026</span>
         <h1>
-            <img src="assets/fonte.png" alt="Raphaela & Matheus" width="818" height="229" decoding="async">
+            <img class="hero-logo" src="assets/logo.png" alt="Raphaela & Matheus" width="915" height="484" decoding="async">
         </h1>
-        <div class="gold-line mt-5" aria-hidden="true"></div>
-        <p class="mt-6 text-sm tracking-[0.18em] uppercase text-white/85">Buffet Vivaro · Maringá</p>
-        <a href="#casal" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 animate-bounce" aria-label="Rolar para o conteúdo">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-        </a>
+        <p class="hero-date">01 | 11 | 2026</p>
+        <div class="gold-line mt-6" aria-hidden="true"></div>
+
+        <div class="hero-welcome">
+            <p>Criamos esse site para compartilhar com vocês os detalhes da organização do nosso casamento.</p>
+            <p>Estamos muito felizes e contamos com a presença de todos no nosso grande dia! Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc. Ah, é importante também confirmar sua presença. Para isto contamos com sua ajuda clicando no menu “Confirme sua Presença” e preenchendo os dados necessários.</p>
+            <p>Para nos presentear, escolha qualquer item da Lista de Casamento, seja um item de algum dos sites, lojas físicas, ou então vocês podem utilizar a opção de cotas.</p>
+            <p>Fiquem à vontade!</p>
+            <p>Aguardamos vocês no nosso grande dia!</p>
+        </div>
+        <p class="hero-sign">Raphaela e Matheus</p>
     </section>
+
+    <div class="photo-window" aria-hidden="true"></div>
 
     <section id="casal" class="py-24 px-4 bg-gradient-to-b from-[#e8eee6] via-olive-50 to-cream">
         <div class="max-w-3xl mx-auto text-center">
@@ -179,8 +201,7 @@
             <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-8">O casal</h2>
             <img src="assets/foto2.png" alt="Raphaela e Matheus" class="w-56 h-56 object-cover rounded-full mx-auto mb-8 shadow-xl border-4 border-white">
             <p class="text-olive-700 leading-relaxed">
-                Criamos este espaço para compartilhar os detalhes do nosso casamento.
-                Estamos muito felizes e contamos com a presença de vocês no nosso grande dia.
+                Foi em um café, em uma tarde ensolarada, que nossos olhares se encontraram pela primeira vez.
             </p>
             <p class="text-olive-600 text-sm mt-6 italic">Textos e fotos desta seção ainda serão preenchidos.</p>
         </div>
@@ -255,25 +276,8 @@
     </div>
 
     <script>
-        const nav = document.getElementById('siteNav');
-        const brand = document.querySelector('.site-nav-brand');
-        const desktopNav = document.getElementById('desktopNav');
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
-
-        function syncNav() {
-            const scrolled = window.scrollY > 40;
-            nav.classList.toggle('is-scrolled', scrolled);
-            const onHero = !scrolled;
-            brand.classList.toggle('text-white', onHero);
-            brand.classList.toggle('text-olive-800', !onHero);
-            desktopNav.classList.toggle('text-white/90', onHero);
-            desktopNav.classList.toggle('text-olive-700', !onHero);
-            menuBtn.classList.toggle('text-white', onHero);
-            menuBtn.classList.toggle('text-olive-800', !onHero);
-        }
-        window.addEventListener('scroll', syncNav, { passive: true });
-        syncNav();
 
         menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         mobileMenu.querySelectorAll('a').forEach((link) => {
