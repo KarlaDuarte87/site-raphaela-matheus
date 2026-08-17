@@ -205,10 +205,14 @@
         .place-card img,
         .place-card-photo {
             width: 100%;
-            height: 140px;
+            height: 220px;
             object-fit: cover;
+            object-position: center;
             display: block;
             background: linear-gradient(135deg, #e3ebe3, #c5d5c5);
+        }
+        .place-card img.place-card-photo--portrait {
+            object-position: top center;
         }
         .place-tooltip {
             font-family: 'Montserrat', sans-serif;
@@ -330,7 +334,7 @@
             </a>
             <nav class="hidden md:flex items-center gap-6" id="desktopNav">
                 <a href="#casal" class="transition">O casal</a>
-                <a href="#padrinhos" class="transition">Padrinhos</a>
+                <!-- <a href="#padrinhos" class="transition">Padrinhos</a> -->
                 <a href="#recepcao" class="transition">Recepção</a>
                 <a href="#presentes" class="transition">Presentes</a>
                 <a href="#hospedagem" class="transition">Onde ficar</a>
@@ -343,7 +347,7 @@
         </div>
         <div id="mobileMenu" class="hidden md:hidden bg-cream border-t border-olive-100 px-4 py-4 space-y-3">
             <a href="#casal" class="block text-olive-700">O casal</a>
-            <a href="#padrinhos" class="block text-olive-700">Padrinhos</a>
+            <!-- <a href="#padrinhos" class="block text-olive-700">Padrinhos</a> -->
             <a href="#recepcao" class="block text-olive-700">Recepção</a>
             <a href="#presentes" class="block text-olive-700">Presentes</a>
             <a href="#hospedagem" class="block text-olive-700">Onde ficar</a>
@@ -389,6 +393,7 @@
 
     <div class="photo-window" aria-hidden="true"></div>
 
+    <!-- Padrinhos — seção em standby enquanto decidimos se teremos
     <section id="padrinhos" class="py-24 px-4 bg-cream border-t border-olive-100">
         <div class="max-w-4xl mx-auto text-center">
             <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Quem caminha com a gente</span>
@@ -401,6 +406,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <section id="recepcao" class="py-24 px-4 text-white text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-olive-800"></div>
@@ -540,6 +546,7 @@
                 name: 'Buffet Vivaro',
                 label: 'Cerimônia e recepção',
                 address: 'Av. Virgílio Manilia, 21784 — Jardim Ouro Cola, Maringá',
+                photo: 'assets/buffet-vivaro.webp',
                 lat: -23.4113703,
                 lng: -51.9895337,
                 maps: 'https://www.google.com/maps/search/?api=1&query=Buffet+Vivaro+Av+Virgilio+Manilia+21784+Maringa'
@@ -550,6 +557,7 @@
                 name: 'Transamerica Executive Maringá',
                 label: 'Hospedagem · 9 min do Vivaro',
                 address: 'Rodovia PR-317, km 5, 5428 — Maringá',
+                photo: 'assets/Transamérica-Executive-Maringá.jpg',
                 phone: '(44) 3123-9800',
                 lat: -23.4655,
                 lng: -51.9316,
@@ -562,6 +570,7 @@
                 name: 'Thomasi Hotel',
                 label: 'Hospedagem · 16 min do Vivaro',
                 address: 'Avenida Colombo, 3531 — Zona 10, Maringá',
+                photo: 'assets/hotel-thomasi.jpg',
                 phone: '(44) 3032-0400',
                 lat: -23.4187946,
                 lng: -51.9165012,
@@ -574,6 +583,7 @@
                 name: 'HUS',
                 label: 'Hospedagem · 14 min do Vivaro',
                 address: 'Av. Adv. Horácio Raccanello Filho, 5105 — Zona 07, Maringá',
+                photo: 'assets/hus-hotel.jpg',
                 phone: '(44) 2018-2018',
                 lat: -23.4184198,
                 lng: -51.9332652,
@@ -586,6 +596,7 @@
                 name: 'Leila Lopez Salon',
                 label: 'Salão de beleza',
                 address: 'Av. Carlos Corrêa Borges, 969, sala 1 — Maringá',
+                photo: 'assets/salão/leilaLopez.jpg',
                 phone: '(44) 3225-4824',
                 whatsapp: '5544984554824',
                 instagram: 'https://www.instagram.com/leilalopezsalon',
@@ -604,6 +615,7 @@
                 type: 'profissional',
                 name: 'Ana Beatriz Caetano',
                 label: 'Hair stylist de noivas',
+                photo: 'assets/salão/Ana Beatriz Caetano.jpg',
                 note: 'Penteados para noivas. Agende pelo Instagram.',
                 instagram: 'https://www.instagram.com/anaocaetanoll'
             },
@@ -612,6 +624,7 @@
                 type: 'profissional',
                 name: 'Leticia Medeiros',
                 label: 'Maquiadora visagista',
+                photo: 'assets/salão/leticia.png',
                 note: 'Maquiagem, sobrancelha e lash. Maringá - PR.',
                 instagram: 'https://www.instagram.com/leticiamedeiros_makeup'
             },
@@ -620,6 +633,7 @@
                 type: 'profissional',
                 name: 'Flaviano Boaràto',
                 label: 'Maquiador e cabeleireiro',
+                photo: 'assets/salão/flavio.png',
                 note: 'Moda, publicidade, eventos e noivas.',
                 whatsapp: '5544991026170',
                 instagram: 'https://www.instagram.com/flaviano'
@@ -675,7 +689,7 @@
 
             function cardHtml(place) {
                 const photo = place.photo
-                    ? `<img src="${place.photo}" alt="${place.name}">`
+                    ? `<img src="${place.photo}" alt="${place.name}"${place.type === 'profissional' ? ' class="place-card-photo--portrait"' : ''}>`
                     : `<div class="place-card-photo"></div>`;
                 const prices = place.prices
                     ? `<ul class="mt-3 text-sm text-olive-700 space-y-1">${place.prices.map((p) => `<li>${p}</li>`).join('')}</ul>`
