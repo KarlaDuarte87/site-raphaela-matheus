@@ -1173,7 +1173,7 @@
             let title = '';
 
             function render() {
-                imgEl.src = photos[index];
+                imgEl.src = encodeURI(photos[index]);
                 imgEl.alt = photos.length > 1 ? `${title} — foto ${index + 1}` : title;
                 captionEl.textContent = title;
                 const multi = photos.length > 1;
@@ -1455,7 +1455,7 @@
                 name: 'Leticia Medeiros',
                 label: 'Maquiadora visagista',
                 photos: [
-                    'assets/salão/leticia.png',
+                    'assets/salão/leticia.jpg',
                     'assets/salão/leticia-medeiros-1.png',
                     'assets/salão/leticia-medeiros-2.png',
                     'assets/salão/leticia-medeiros-3.png',
@@ -1473,8 +1473,8 @@
                 name: 'Flaviano Boaràto',
                 label: 'Maquiador e cabeleireiro',
                 photos: [
-                    'assets/salão/flavio.png',
-                    'assets/salão/flavio-1.png',
+                    'assets/salão/flavio.jpg',
+                    'assets/salão/flavio-1.jpg',
                     'assets/salão/flavio-2.png',
                     'assets/salão/flavio-3.png',
                     'assets/salão/flavio-4.png',
@@ -1569,11 +1569,11 @@
 
                 if (!photos.length) return '<div class="place-card-photo"></div>';
                 if (photos.length === 1) {
-                    return `<img src="${photos[0]}" alt="${place.name}" class="${portraitClass.trim()}">`;
+                    return `<img src="${encodeURI(photos[0])}" alt="${place.name}" class="${portraitClass.trim()}">`;
                 }
 
                 const slides = photos.map((src, index) =>
-                    `<img src="${src}" alt="${place.name} — foto ${index + 1}" class="${portraitClass.trim()}">`
+                    `<img src="${encodeURI(src)}" alt="${place.name} — foto ${index + 1}" class="${portraitClass.trim()}">`
                 ).join('');
                 const dots = photos.map((_, index) =>
                     `<button type="button" class="place-gallery-dot${index === 0 ? ' is-active' : ''}" data-index="${index}" aria-label="Foto ${index + 1}"></button>`
