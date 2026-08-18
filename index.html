@@ -216,6 +216,57 @@
             border-color: #759375;
             box-shadow: 0 10px 28px rgba(55, 73, 55, 0.12);
         }
+        .place-price-table-wrap {
+            margin-top: 0.85rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid #e3ebe3;
+        }
+        .place-price-table-caption {
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #759375;
+            margin-bottom: 0.55rem;
+        }
+        .place-price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            color: #445b44;
+        }
+        .place-price-table th,
+        .place-price-table td {
+            padding: 0.4rem 0.35rem;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .place-price-table thead th {
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #759375;
+            font-weight: 500;
+            border-bottom: 1px solid #e3ebe3;
+        }
+        .place-price-table thead th:first-child {
+            text-align: left;
+        }
+        .place-price-table tbody tr + tr th,
+        .place-price-table tbody tr + tr td {
+            border-top: 1px dashed #e3ebe3;
+        }
+        .place-price-table tbody th[scope="row"] {
+            text-align: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2d3b2d;
+            white-space: nowrap;
+        }
+        .place-price-table tbody td {
+            font-variant-numeric: tabular-nums;
+            color: #374937;
+        }
         .place-card img,
         .place-card-photo {
             width: 100%;
@@ -737,7 +788,7 @@
 
     <section id="home" class="hero">
         <h1>
-            <img class="hero-logo" src="assets/logo.png" alt="Raphaela & Matheus" width="915" height="484" decoding="async">
+            <img class="hero-logo" src="assets/logo-in-vitro.png" alt="Raphaela & Matheus" width="1774" height="887" decoding="async">
         </h1>
         <p class="hero-date">01 | 11 | 2026</p>
         <div class="gold-line mt-6" aria-hidden="true"></div>
@@ -1207,8 +1258,51 @@
                 whatsapp: '554484568184',
                 lat: -23.4655,
                 lng: -51.9316,
-                prices: ['Individual R$ 283', 'Duplo R$ 313', 'Triplo R$ 360'],
+                priceTable: {
+                    columns: ['Single', 'Duplo', 'Triplo'],
+                    rows: [
+                        { category: 'Superior', values: ['R$ 271', 'R$ 307', 'R$ 343'] },
+                        { category: 'Luxo', values: ['R$ 339', 'R$ 377', null] },
+                        { category: 'Premium', values: ['R$ 438', 'R$ 510', null] }
+                    ]
+                },
                 maps: 'https://www.google.com/maps/search/?api=1&query=Transamerica+Executive+Maringa+PR-317+km+5'
+            },
+            {
+                id: 'deville',
+                type: 'hotel',
+                name: 'Deville Prime Maringá',
+                label: 'Hospedagem · 12 min do Vivaro',
+                address: 'Av. Herval, 26 — Zona 01, Maringá',
+                photos: [
+                    'assets/hoteis/deville0.jpg',
+                    'assets/hoteis/deville1.jpg',
+                    'assets/hoteis/deville2.jpg',
+                    'assets/hoteis/deville3.jpg',
+                    'assets/hoteis/deville4.jpg',
+                    'assets/hoteis/deville5.jpg',
+                    'assets/hoteis/deville6.jpg',
+                    'assets/hoteis/deville7.jpg',
+                    'assets/hoteis/deville8.jpg',
+                    'assets/hoteis/deville9.jpg',
+                    'assets/hoteis/deville10.jpg',
+                    'assets/hoteis/deville11.jpg',
+                    'assets/hoteis/deville12.jpg',
+                    'assets/hoteis/deville13.jpg',
+                    'assets/hoteis/deville14.jpg',
+                    'assets/hoteis/deville15.jpg',
+                    'assets/hoteis/deville16.jpg',
+                    'assets/hoteis/deville17.jpg',
+                    'assets/hoteis/deville18.jpg'
+                ],
+                phone: '(44) 3221-6700',
+                lat: -23.42528,
+                lng: -51.93833,
+                note: 'Hotel 4 estrelas. Use o cupom CASAMENTORM na reserva online.',
+                prices: ['A partir de R$ 431/noite (ref. nov/2026)'],
+                website: 'https://www.deville.com.br/hotel-deville-prime-maringa',
+                booking: 'https://reservas2.deville.com.br/hotels/HOTEL_OMNI_4799?startDate=2026-10-30&endDate=2026-11-02&adults=1&children=0&enablePromoCode=true&promoCode=CASAMENTORM',
+                maps: 'https://www.google.com/maps/search/?api=1&query=Deville+Prime+Maringa+Av+Herval+26'
             },
             {
                 id: 'thomasi',
@@ -1390,6 +1484,28 @@
                 note: 'Moda, publicidade, eventos e noivas.',
                 whatsapp: '5544991026170',
                 instagram: 'https://www.instagram.com/flaviano'
+            },
+            {
+                id: 'gabriela',
+                type: 'salao',
+                name: 'Studio Gabriela de Paula Makeup',
+                label: 'Produção de noivas',
+                photos: [
+                    'assets/salão/studi-grabriela-de-paula-1.png',
+                    'assets/salão/studi-grabriela-de-paula-2.png',
+                    'assets/salão/studi-grabriela-de-paula-3.png',
+                    'assets/salão/studi-grabriela-de-paula-4.png',
+                    'assets/salão/studi-grabriela-de-paula-5.png',
+                    'assets/salão/studi-grabriela-de-paula-6.png',
+                    'assets/salão/studi-grabriela-de-paula-7.png',
+                    'assets/salão/studi-grabriela-de-paula-8.png',
+                    'assets/salão/studi-grabriela-de-paula-9.png',
+                    'assets/salão/studi-grabriela-de-paula-10.png',
+                    'assets/salão/studi-grabriela-de-paula-11.png'
+                ],
+                note: 'Especialistas em produção de noivas: mechas, cortes e maquiagem beauty.',
+                whatsappLink: 'https://api.whatsapp.com/message/35YDTCXXAM4XO1?autoload=1&app_absent=0',
+                instagram: 'https://www.instagram.com/studiogabrieladepaula'
             }
         ];
 
@@ -1534,11 +1650,34 @@
                 });
             }
 
+            function priceBlock(place) {
+                if (place.priceTable) {
+                    const { columns, rows } = place.priceTable;
+                    const head = columns.map((col) => `<th scope="col">${col}</th>`).join('');
+                    const body = rows.map((row) => `
+                        <tr>
+                            <th scope="row">${row.category}</th>
+                            ${row.values.map((value) => `<td>${value ?? '—'}</td>`).join('')}
+                        </tr>
+                    `).join('');
+                    return `
+                        <div class="place-price-table-wrap">
+                            <p class="place-price-table-caption">Tarifas para convidados</p>
+                            <table class="place-price-table">
+                                <thead><tr><th scope="col">Categoria</th>${head}</tr></thead>
+                                <tbody>${body}</tbody>
+                            </table>
+                        </div>`;
+                }
+                if (place.prices) {
+                    return `<ul class="mt-3 text-sm text-olive-700 space-y-1">${place.prices.map((p) => `<li>${p}</li>`).join('')}</ul>`;
+                }
+                return '';
+            }
+
             function cardHtml(place) {
                 const photo = photoBlock(place);
-                const prices = place.prices
-                    ? `<ul class="mt-3 text-sm text-olive-700 space-y-1">${place.prices.map((p) => `<li>${p}</li>`).join('')}</ul>`
-                    : '';
+                const prices = priceBlock(place);
                 const team = place.team
                     ? `<div class="mt-4 pt-3 border-t border-olive-100 space-y-2">${place.team.map((person) => {
                         const links = [
@@ -1553,6 +1692,8 @@
                 const actions = [
                     place.phone ? `<a href="${telLink(place.phone)}">${place.phone}</a>` : '',
                     waLink(place) ? `<a href="${waLink(place)}" target="_blank" rel="noopener">WhatsApp</a>` : '',
+                    place.booking ? `<a href="${place.booking}" target="_blank" rel="noopener">Reservar</a>` : '',
+                    place.website ? `<a href="${place.website}" target="_blank" rel="noopener">Site</a>` : '',
                     place.instagram ? `<a href="${place.instagram}" target="_blank" rel="noopener">Instagram</a>` : '',
                     googleLink(place) ? `<a href="${googleLink(place)}" target="_blank" rel="noopener">Google Maps</a>` : ''
                 ].filter(Boolean).join(' · ');
