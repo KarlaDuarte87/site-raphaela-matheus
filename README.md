@@ -11,4 +11,4 @@ python3 -m http.server 8081
 
 Acesse http://localhost:8081
 
-O convite continua em `../Rapha` (porta 8080).
+O convite digital fica em `/convite/` (`http://localhost:8081/convite/`). A lista de nomes está em `convite/convidados.json`. Os links para enviar ficam em `convite/links.html` (uso interno).

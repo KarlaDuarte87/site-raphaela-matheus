@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Links dos convites — uso interno</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background: #fcfbfa;
+            color: #374937;
+            max-width: 42rem;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem;
+        }
+        h1 { font-weight: 400; font-size: 1.75rem; }
+        p { line-height: 1.6; color: #445b44; }
+        label { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #759375; }
+        input {
+            width: 100%;
+            margin: 0.4rem 0 1.25rem;
+            padding: 0.55rem 0.7rem;
+            border: 1px solid #c5d5c5;
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+        }
+        ul { list-style: none; padding: 0; }
+        li {
+            border-top: 1px solid #e3ebe3;
+            padding: 0.85rem 0;
+        }
+        strong { display: block; margin-bottom: 0.25rem; }
+        a { color: #445b44; word-break: break-all; }
+        button {
+            margin-left: 0.5rem;
+            border: 1px solid #445b44;
+            background: #445b44;
+            color: #fff;
+            border-radius: 999px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Links personalizados</h1>
+    <p>Página só para montar os convites. Não compartilhe este endereço com os convidados.</p>
+    <label for="baseUrl">Endereço base</label>
+    <input id="baseUrl" type="url">
+    <ul id="list"></ul>
+    <script>
+        const baseInput = document.getElementById('baseUrl');
+        const listEl = document.getElementById('list');
+        const defaultBase = new URL('index.html', window.location.href).href.replace(/links\.html.*/i, '');
+        baseInput.value = 'https://www.raphaelazanin.com.br/convite/';
+
+        let guests = [];
+
+        function slugify(value) {
+            return String(value || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+        }
+
+        function inviteUrl(slug) {
+            const base = (baseInput.value || defaultBase).replace(/\/?$/, '/');
+            return `${base}?para=${encodeURIComponent(slug)}`;
+        }
+
+        function render() {
+            listEl.innerHTML = guests.map((guest) => {
+                const slug = slugify(guest.slug || guest.nome);
+                const url = inviteUrl(slug);
+                return `<li>
+                    <strong>${guest.nome}</strong>
+                    <a href="${url}">${url}</a>
+                    <button type="button" data-url="${url}">Copiar</button>
+                </li>`;
+            }).join('');
+        }
+
+        fetch('convidados.json')
+            .then((res) => res.json())
+            .then((data) => {
+                guests = Array.isArray(data) ? data : [];
+                render();
+            });
+
+        baseInput.addEventListener('input', render);
+        listEl.addEventListener('click', async (event) => {
+            const btn = event.target.closest('button[data-url]');
+            if (!btn) return;
+            await navigator.clipboard.writeText(btn.dataset.url);
+            btn.textContent = 'Copiado';
+            setTimeout(() => { btn.textContent = 'Copiar'; }, 1600);
+        });
+    </script>
+</body>
+</html>

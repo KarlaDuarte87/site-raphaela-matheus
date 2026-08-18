@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raphaela & Matheus - Convite de Casamento</title>
+    <meta name="description" content="Você está convidado para celebrar o casamento de Raphaela e Matheus. Domingo, 1º de novembro de 2026, às 16h30, no Buffet Vivaro (Salão Florença), Maringá.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Raphaela & Matheus - Convite de Casamento">
+    <meta property="og:description" content="Você está convidado para celebrar o casamento de Raphaela e Matheus. Domingo, 1º de novembro de 2026, às 16h30, no Buffet Vivaro (Salão Florença), Maringá.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Raphaela & Matheus - Convite de Casamento">
+    <meta name="twitter:description" content="Você está convidado para celebrar o casamento de Raphaela e Matheus. Domingo, 1º de novembro de 2026, às 16h30, no Buffet Vivaro (Salão Florença), Maringá.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            50: '#f4f7f4',
+                            100: '#e3ebe3',
+                            200: '#c5d5c5',
+                            300: '#9db49d',
+                            400: '#759375',
+                            500: '#587458',
+                            600: '#445b44',
+                            700: '#374937',
+                            800: '#2d3b2d',
+                            900: '#253025',
+                        },
+                        cream: '#fcfbfa',
+                        gold: '#c5a059',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        html::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfbfa;
+            color: #374937;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* ===== Capa com arte (abertura do envelope) ===== */
+        #welcomeScreen {
+            background:
+                radial-gradient(ellipse at 50% 30%, #ebe8e0 0%, #d9d6ce 55%, #cfcbc3 100%);
+            perspective: 1600px;
+        }
+        .cover {
+            /* Centro do lacre — a aba leva o selo inteiro, sem romper */
+            --seal-x: 50%;
+            --seal-y: 40.2%;
+            --flap-join: 35.2%;
+            position: relative;
+            width: min(100%, 400px, calc(92vh * 561 / 1024));
+            aspect-ratio: 561 / 1024;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow:
+                0 24px 55px rgba(55, 50, 40, 0.28),
+                0 2px 0 rgba(255,255,255,0.35) inset;
+            background: #f3f1eb;
+            transform-style: preserve-3d;
+        }
+        .cover-liner {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background:
+                linear-gradient(180deg, #f7f5ef 0%, #e9ece3 42%, #f4f2ec 100%);
+            transition: background 0.7s ease, opacity 0.7s ease;
+        }
+        .cover-body,
+        .cover-flap-art {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+        /* Corpo: arte sem a aba e sem o lacre (selo sobe junto da aba) */
+        .cover-body {
+            z-index: 1;
+            clip-path: polygon(
+                0% 0%,
+                44% var(--flap-join),
+                41% 36.2%,
+                38.2% 37.4%,
+                36.2% 39%,
+                35% 41%,
+                34.8% 43%,
+                35.6% 45%,
+                37.4% 46.6%,
+                40% 47.8%,
+                43.2% 48.6%,
+                46.6% 49%,
+                50% 49.2%,
+                53.4% 49%,
+                56.8% 48.6%,
+                60% 47.8%,
+                62.6% 46.6%,
+                64.4% 45%,
+                65.2% 43%,
+                65% 41%,
+                63.8% 39%,
+                61.8% 37.4%,
+                59% 36.2%,
+                56% var(--flap-join),
+                100% 0%,
+                100% 100%,
+                0% 100%
+            );
+        }
+        .cover-flap {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            transform-origin: 50% 0%;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            /* Triângulo + lacre inteiro (selo não rompe) */
+            clip-path: polygon(
+                0% 0%,
+                100% 0%,
+                56% var(--flap-join),
+                59% 36.2%,
+                61.8% 37.4%,
+                63.8% 39%,
+                65% 41%,
+                65.2% 43%,
+                64.4% 45%,
+                62.6% 46.6%,
+                60% 47.8%,
+                56.8% 48.6%,
+                53.4% 49%,
+                50% 49.2%,
+                46.6% 49%,
+                43.2% 48.6%,
+                40% 47.8%,
+                37.4% 46.6%,
+                35.6% 45%,
+                34.8% 43%,
+                35% 41%,
+                36.2% 39%,
+                38.2% 37.4%,
+                41% 36.2%,
+                44% var(--flap-join)
+            );
+            transition: transform 1.35s cubic-bezier(0.45, 0.02, 0.18, 1);
+            filter: drop-shadow(0 10px 18px rgba(40, 35, 25, 0.22));
+            will-change: transform;
+        }
+        .cover-seal-btn {
+            position: absolute;
+            left: var(--seal-x);
+            top: var(--seal-y);
+            z-index: 6;
+            transform: translate(-50%, -50%);
+            width: clamp(88px, 24%, 112px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 0;
+            padding: 0;
+            background: transparent;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.28s ease;
+        }
+        .cover-seal-btn:hover { transform: translate(-50%, -50%) scale(1.05); }
+        .cover-seal-btn:active { transform: translate(-50%, -50%) scale(0.92); }
+        .cover-seal-btn:focus-visible {
+            outline: 2px solid #c5a059;
+            outline-offset: 6px;
+        }
+        .seal-hit {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            animation: seal-pulse 2.4s ease-in-out infinite;
+        }
+        .seal-hit::after {
+            content: '';
+            position: absolute;
+            inset: -10%;
+            border-radius: 50%;
+            border: 1.5px solid rgba(197, 160, 89, 0.45);
+            opacity: 0;
+            animation: seal-ring 2.4s ease-out infinite;
+        }
+        @keyframes seal-pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.03); filter: brightness(1.06); }
+        }
+        @keyframes seal-ring {
+            0% { transform: scale(0.92); opacity: 0.55; }
+            70%, 100% { transform: scale(1.28); opacity: 0; }
+        }
+        #welcomeScreen.is-opening .cover {
+            overflow: visible;
+            transition:
+                opacity 0.75s ease 0.55s,
+                transform 0.95s cubic-bezier(0.4, 0.05, 0.2, 1) 0.45s,
+                filter 0.95s ease 0.45s,
+                box-shadow 0.6s ease 0.3s;
+            opacity: 0;
+            transform: translateY(-14px) scale(1.015);
+            filter: blur(1.5px);
+            box-shadow: none;
+        }
+        /* Aba sobe com o lacre preso nela (como no envelope de referência) */
+        #welcomeScreen.is-opening .cover-flap {
+            transform: rotateX(-168deg);
+        }
+        #welcomeScreen.is-opening .cover-liner {
+            background:
+                radial-gradient(ellipse at 50% 28%, #f3e2b8 0%, #efe8d8 38%, #e9ece3 70%);
+        }
+        #welcomeScreen.is-opening .cover-seal-btn {
+            pointer-events: none;
+            animation: none;
+        }
+        #welcomeScreen.is-opening .seal-hit,
+        #welcomeScreen.is-opening .seal-hit::after {
+            animation: none;
+        }
+        #welcomeScreen.is-opening {
+            transition: opacity 0.45s ease 1.1s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .seal-hit, .seal-hit::after { animation: none; }
+            #welcomeScreen.is-opening .cover-flap {
+                transform: none;
+                opacity: 0;
+                transition: opacity 0.35s ease;
+            }
+            #welcomeScreen.is-opening .cover {
+                transition: opacity 0.4s ease;
+                filter: none;
+                transform: none;
+            }
+            /* .parallax-media { transform: none !important; } */
+        }
+
+        /*
+        .parallax-scene {
+            position: relative;
+            height: min(78vh, 720px);
+            overflow: hidden;
+            background: #2d3b2d;
+        }
+        .parallax-media {
+            position: absolute;
+            inset: -18% 0;
+            height: 136%;
+            width: 100%;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+        }
+        .parallax-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 42%;
+            display: block;
+        }
+        .parallax-veil {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(180deg, rgba(37, 48, 37, 0.35) 0%, rgba(37, 48, 37, 0.12) 42%, rgba(37, 48, 37, 0.45) 100%);
+            pointer-events: none;
+        }
+        .parallax-copy {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            color: #fff;
+        }
+        .parallax-copy span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+        .parallax-copy h2 {
+            margin-top: 0.75rem;
+            max-width: min(92vw, 520px);
+        }
+        .parallax-copy h2 img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 18px rgba(0, 0, 0, 0.28));
+        }
+        .parallax-copy .line {
+            width: 3.5rem;
+            height: 1px;
+            background: rgba(197, 160, 89, 0.85);
+            margin-top: 1rem;
+        }
+        */
+        .rsvp-card {
+            background: #fff;
+            border: 1px solid #e3ebe3;
+            box-shadow: 0 18px 40px rgba(55, 73, 55, 0.08);
+        }
+        .rsvp-field label {
+            display: block;
+            text-align: left;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #374937;
+            margin-bottom: 0.45rem;
+        }
+        .rsvp-field input,
+        .rsvp-field select,
+        .rsvp-field textarea {
+            width: 100%;
+            border: 1px solid #d4ddd4;
+            border-radius: 0.7rem;
+            padding: 0.75rem 0.9rem;
+            background: #fff;
+            color: #2d3b2d;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .rsvp-field select {
+            background: #f4f7f4;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23587458' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6.5L8 10l3.5-3.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.85rem center;
+            padding-right: 2.2rem;
+        }
+        .rsvp-field textarea {
+            min-height: 96px;
+            resize: vertical;
+        }
+        .rsvp-field input:focus,
+        .rsvp-field select:focus,
+        .rsvp-field textarea:focus {
+            border-color: #759375;
+            box-shadow: 0 0 0 3px rgba(117, 147, 117, 0.18);
+        }
+        .rsvp-submit {
+            width: 100%;
+            background: #445b44;
+            color: #fff;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border-radius: 0.75rem;
+            padding: 0.95rem 1rem;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+        .rsvp-submit:hover { background: #374937; }
+        .rsvp-submit:active { transform: scale(0.99); }
+        .rsvp-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+    </style>
+</head>
+<body class="overflow-x-hidden relative">
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/audio/audio.webm" type="audio/webm">
+    </audio>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <!-- Auto Scroll Toggle -->
+        <button id="autoScrollBtn" onclick="toggleAutoScroll()" title="Auto Rolagem" class="w-12 h-12 bg-olive-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-olive-700 transition transform hover:scale-105 active:scale-95 group relative">
+            <svg id="scrollIcon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+            <span class="absolute right-14 bg-olive-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow-md">Auto Rolagem</span>
+        </button>
+        <!-- Sound Toggle -->
+        <button id="soundToggleBtn" onclick="toggleSound()" title="Ligar/Desligar Música" class="w-12 h-12 bg-olive-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-olive-700 transition transform hover:scale-105 active:scale-95 group relative">
+            <svg id="soundIconOn" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <svg id="soundIconOff" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+            <span class="absolute right-14 bg-olive-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow-md">Som / Música</span>
+        </button>
+    </div>
+
+    <div id="welcomeScreen" class="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-5 overflow-hidden">
+        <div class="cover" role="dialog" aria-label="Capa do convite">
+            <div class="cover-liner" aria-hidden="true"></div>
+            <img class="cover-body" src="assets/capa-arte-definitiva.png" alt="Raphaela e Matheus — Aqui inicia a nossa história." width="561" height="1024" decoding="async">
+
+            <div class="cover-flap">
+                <img class="cover-flap-art" src="assets/capa-arte-definitiva.png" alt="" width="561" height="1024" decoding="async" aria-hidden="true">
+                <button type="button" class="cover-seal-btn" onclick="openInvitation()" aria-label="Abrir convite">
+                    <span class="seal-hit" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main id="mainContent" class="opacity-0 transition-opacity duration-1000">
+        
+        <!-- Hero Section with polaroid photos -->
+        <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative bg-gradient-to-b from-[#e8eee6] via-olive-50 to-[#f2f5f0] py-20">
+            <div class="absolute inset-0 opacity-[0.12] bg-[radial-gradient(#759375_1px,transparent_1px)] [background-size:18px_18px] pointer-events-none"></div>
+            
+            <div class="max-w-2xl mx-auto space-y-6 z-10">
+                <span class="text-xs md:text-sm tracking-[0.4em] uppercase text-olive-600 font-medium">Save The Date</span>
+                
+                <h1 class="mx-auto max-w-xl px-2">
+                    <img src="assets/fonte.png" alt="Raphaela & Matheus" width="818" height="229" class="w-full h-auto mx-auto select-none" decoding="async">
+                </h1>
+                <p id="guestGreeting" class="font-serif italic text-2xl md:text-[1.85rem] text-olive-800 leading-snug max-w-md mx-auto" hidden></p>
+                
+                <div class="w-24 h-0.5 bg-olive-400 mx-auto my-4"></div>
+                
+                <div class="flex flex-wrap justify-center gap-6 my-8">
+                    <div class="bg-white p-3 pb-7 shadow-xl rounded rotate-[-3deg] hover:rotate-0 transition duration-300 w-56">
+                        <img src="assets/foto2.png" alt="Raphaela e Matheus" class="w-full h-64 object-cover object-center rounded-sm">
+                        <span class="font-serif text-xs text-olive-700 mt-2 block">O começo de tudo</span>
+                    </div>
+                    <div class="bg-white p-3 pb-7 shadow-xl rounded rotate-[3deg] hover:rotate-0 transition duration-300 w-56 mt-4 md:mt-0">
+                        <img src="assets/foto1.jpeg" alt="Raphaela e Matheus" class="w-full h-64 object-cover object-[center_60%] rounded-sm">
+                        <span class="font-serif text-xs text-olive-700 mt-2 block">O Grande Dia</span>
+                    </div>
+                </div>
+
+                <p class="text-olive-700 text-sm md:text-base tracking-wide max-w-md mx-auto">
+                    "O amor é paciente, o amor é bondoso."
+                </p>
+            </div>
+
+            <div class="absolute bottom-6 animate-bounce text-olive-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </section>
+
+        <!--
+        <section class="parallax-scene" aria-label="Nossa história">
+            <div class="parallax-media" data-parallax>
+                <img src="assets/foto1.jpeg" alt="Raphaela e Matheus" width="1200" height="1600" decoding="async" loading="lazy">
+            </div>
+            <div class="parallax-veil" aria-hidden="true"></div>
+            <div class="parallax-copy">
+                <span>Nossa História</span>
+                <h2>
+                    <img src="assets/fonte.png" alt="Raphaela & Matheus" width="818" height="229" decoding="async">
+                </h2>
+                <div class="line" aria-hidden="true"></div>
+            </div>
+        </section>
+        -->
+
+        <section class="py-20 px-4 text-white text-center relative overflow-hidden">
+            <img src="assets/img2.jpeg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover scale-105">
+            <div class="absolute inset-0 bg-olive-900/55 backdrop-blur-sm"></div>
+
+            <div class="max-w-3xl mx-auto space-y-8 relative z-10">
+                <span class="text-xs uppercase tracking-[0.3em] text-olive-200">Cerimônia & Recepção</span>
+                <h2 class="text-4xl md:text-5xl font-serif">Buffet Vivaro</h2>
+                <p class="text-olive-100 text-sm max-w-md mx-auto">Salão Florença<br>Av. Virgílio Manilia, 21784 — Jardim Ouro Cola — Maringá</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-olive-100 mt-8 text-left">
+                    <div class="bg-olive-900/50 p-6 rounded-2xl backdrop-blur-md border border-white/15">
+                        <h3 class="font-serif text-2xl mb-2 text-white">Cerimônia</h3>
+                        <p class="text-sm font-medium">Horário: 16h30</p>
+                        <p class="text-xs text-olive-200 mt-1">A cerimônia começará pontualmente às 16h30.</p>
+                    </div>
+                    <div class="bg-olive-900/50 p-6 rounded-2xl backdrop-blur-md border border-white/15">
+                        <h3 class="font-serif text-2xl mb-2 text-white">Padrinhos</h3>
+                        <p class="text-sm font-medium">Chegada: 16h00</p>
+                        <p class="text-xs text-olive-200 mt-1">Pedimos que os padrinhos cheguem com 30 minutos de antecedência para a organização do cortejo.</p>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/20 flex flex-col md:flex-row justify-around items-center gap-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-olive-200 block mb-1">Data</span>
+                        <span class="font-serif text-2xl">Domingo | 01 | Novembro | 2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-4 bg-cream text-center">
+            <div class="max-w-xl mx-auto">
+                <span class="text-xs uppercase tracking-[0.3em] text-olive-500">Contagem Regressiva</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-olive-800 mt-2 mb-8">Para o Grande Dia</h2>
+                
+                <div id="countdown" class="grid grid-cols-4 gap-4 text-olive-800 mb-12">
+                    <div class="bg-olive-50 p-4 rounded-xl border border-olive-200 shadow-sm">
+                        <span id="days" class="text-3xl md:text-4xl font-serif font-bold block text-olive-600">00</span>
+                        <span class="text-xs uppercase tracking-wider text-olive-500">Dias</span>
+                    </div>
+                    <div class="bg-olive-50 p-4 rounded-xl border border-olive-200 shadow-sm">
+                        <span id="hours" class="text-3xl md:text-4xl font-serif font-bold block text-olive-600">00</span>
+                        <span class="text-xs uppercase tracking-wider text-olive-500">Horas</span>
+                    </div>
+                    <div class="bg-olive-50 p-4 rounded-xl border border-olive-200 shadow-sm">
+                        <span id="minutes" class="text-3xl md:text-4xl font-serif font-bold block text-olive-600">00</span>
+                        <span class="text-xs uppercase tracking-wider text-olive-500">Minutos</span>
+                    </div>
+                    <div class="bg-olive-50 p-4 rounded-xl border border-olive-200 shadow-sm">
+                        <span id="seconds" class="text-3xl md:text-4xl font-serif font-bold block text-olive-600">00</span>
+                        <span class="text-xs uppercase tracking-wider text-olive-500">Segundos</span>
+                    </div>
+                </div>
+
+                <div class="bg-olive-700 text-white p-6 rounded-2xl shadow-lg max-w-sm mx-auto">
+                    <h3 class="font-serif text-xl mb-4 tracking-widest">Novembro 2026</h3>
+                    <div class="grid grid-cols-7 gap-2 text-xs uppercase tracking-wider text-olive-200 mb-2">
+                        <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+                    </div>
+                    <div class="grid grid-cols-7 gap-2 text-sm">
+                        <span class="text-olive-400">26</span><span class="text-olive-400">27</span><span class="text-olive-400">28</span><span class="text-olive-400">29</span><span class="text-olive-400">30</span><span class="text-olive-400">31</span>
+                        <span class="bg-cream text-black font-bold rounded-full w-8 h-8 flex items-center justify-center mx-auto shadow">1</span>
+                        <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                        <span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                        <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+                        <span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
+                        <span>30</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="confirmacao" class="py-20 px-4 bg-olive-50 border-t border-olive-100">
+            <div class="max-w-lg mx-auto">
+                <form id="rsvpForm" class="rsvp-card rounded-2xl px-6 py-10 sm:px-10 text-center" novalidate>
+                    <span class="text-[11px] uppercase tracking-[0.28em] text-olive-500">Responda até 01/10</span>
+                    <h2 class="text-3xl md:text-[2.15rem] font-serif text-olive-800 mt-2 mb-8">Confirme sua Presença</h2>
+
+                    <div class="space-y-5 text-left">
+                        <div class="rsvp-field">
+                            <label for="rsvpNome">Nome Completo</label>
+                            <input id="rsvpNome" name="nome" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="rsvp-field">
+                            <label for="rsvpContato">WhatsApp</label>
+                            <input id="rsvpContato" name="contato" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="15" required>
+                        </div>
+                        <div class="rsvp-field">
+                            <label for="rsvpPresenca">Você irá comparecer?</label>
+                            <select id="rsvpPresenca" name="presenca" required>
+                                <option value="sim">Sim, confirmo minha presença!</option>
+                                <option value="nao">Infelizmente não poderei comparecer</option>
+                            </select>
+                        </div>
+                        <div class="rsvp-field" id="rsvpAcompanhantesWrap">
+                            <label for="rsvpAcompanhantes">Nome dos Acompanhantes (se houver)</label>
+                            <textarea id="rsvpAcompanhantes" name="acompanhantes" placeholder="Digite o nome dos acompanhantes, se aplicável"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="rsvpSubmit" class="rsvp-submit mt-8">Enviar confirmação</button>
+                    <p id="rsvpStatus" class="mt-4 text-sm text-olive-600 min-h-[1.25rem]" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+        <section class="py-20 px-4 bg-olive-800 text-white text-center">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <span class="text-xs uppercase tracking-[0.3em] text-olive-300">Mais detalhes</span>
+                <h2 class="text-4xl font-serif">Site Oficial do Casamento</h2>
+                <p class="text-olive-200 text-sm leading-relaxed">
+                    Para ver a história do casal, lista de presentes, hospedagens e tudo sobre o grande dia, acesse o nosso site oficial:
+                </p>
+                <div class="pt-6">
+                    <a href="../" class="inline-flex items-center gap-3 px-8 py-4 bg-olive-600 hover:bg-olive-500 text-white font-medium text-sm uppercase tracking-wider rounded-full shadow-lg transition transform hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Acessar o site do casamento
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-10 bg-olive-900 text-olive-300 text-center text-xs tracking-widest border-t border-olive-800">
+            <p class="font-serif text-lg text-olive-100 mb-2">Raphaela & Matheus</p>
+            <p>Com amor, 1º de Novembro de 2026</p>
+        </footer>
+
+    </main>
+
+    <script>
+        (function personalizeGuest() {
+            function slugify(value) {
+                return String(value || '')
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
+
+            function readSlug() {
+                const params = new URLSearchParams(window.location.search);
+                const named = params.get('para') || params.get('c');
+                if (named) return slugify(named);
+                const firstKey = [...params.keys()][0];
+                if (firstKey && params.get(firstKey) === '') return slugify(firstKey);
+                return '';
+            }
+
+            const slug = readSlug();
+            if (!slug) return;
+
+            fetch('convidados.json')
+                .then((res) => (res.ok ? res.json() : []))
+                .then((list) => {
+                    const guests = Array.isArray(list) ? list : [];
+                    const guest = guests.find((item) => slugify(item.slug || item.nome) === slug);
+                    if (!guest || !guest.nome) return;
+
+                    const greeting = document.getElementById('guestGreeting');
+                    const nameField = document.getElementById('rsvpNome');
+                    const plural = /\se\s|&/i.test(guest.nome);
+                    if (greeting) {
+                        greeting.hidden = false;
+                        greeting.textContent = plural
+                            ? `${guest.nome}, temos a alegria de convidar vocês para celebrar o nosso casamento.`
+                            : `${guest.nome}, temos a alegria de convidar você para celebrar o nosso casamento.`;
+                    }
+                    if (nameField && !nameField.value) nameField.value = guest.nome;
+                    document.title = `Convite para ${guest.nome} — Raphaela & Matheus`;
+                })
+                .catch(() => {});
+        })();
+
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        function toggleSound() {
+            const iconOn = document.getElementById('soundIconOn');
+            const iconOff = document.getElementById('soundIconOff');
+            
+            if (isPlaying) {
+                bgMusic.pause();
+                isPlaying = false;
+                iconOn.classList.add('hidden');
+                iconOff.classList.remove('hidden');
+            } else {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    iconOn.classList.remove('hidden');
+                    iconOff.classList.add('hidden');
+                }).catch(e => {
+                    console.log("Audio autoplay prevented:", e);
+                });
+            }
+        }
+
+        function openInvitation() {
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            const mainContent = document.getElementById('mainContent');
+            if (welcomeScreen.classList.contains('is-opening')) return;
+
+            bgMusic.volume = 0.5;
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                document.getElementById('soundIconOn').classList.remove('hidden');
+                document.getElementById('soundIconOff').classList.add('hidden');
+            }).catch(e => console.log(e));
+
+            welcomeScreen.classList.add('is-opening');
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                mainContent.style.opacity = '1';
+                startAutoScroll();
+            }, 1450);
+        }
+
+        // Auto Scroll Toggle Logic
+        let autoScrollActive = false;
+        let scrollInterval = null;
+
+        function toggleAutoScroll() {
+            if (autoScrollActive) {
+                stopAutoScroll();
+            } else {
+                startAutoScroll();
+            }
+        }
+
+        function startAutoScroll() {
+            autoScrollActive = true;
+            const scrollBtn = document.getElementById('autoScrollBtn');
+            scrollBtn.classList.add('ring-4', 'ring-olive-300');
+            
+            scrollInterval = setInterval(() => {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+                    stopAutoScroll();
+                    return;
+                }
+                window.scrollBy({ top: 1, behavior: 'smooth' });
+            }, 30);
+        }
+
+        function stopAutoScroll() {
+            autoScrollActive = false;
+            clearInterval(scrollInterval);
+            const scrollBtn = document.getElementById('autoScrollBtn');
+            scrollBtn.classList.remove('ring-4', 'ring-olive-300');
+        }
+
+        window.addEventListener('wheel', () => { if (autoScrollActive) stopAutoScroll(); });
+        window.addEventListener('touchstart', () => { if (autoScrollActive) stopAutoScroll(); });
+
+        /*
+        (function initParallax() {
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const layers = document.querySelectorAll('[data-parallax]');
+            if (reduce || !layers.length) return;
+
+            let ticking = false;
+            function update() {
+                const viewH = window.innerHeight;
+                layers.forEach((layer) => {
+                    const scene = layer.closest('.parallax-scene');
+                    if (!scene) return;
+                    const rect = scene.getBoundingClientRect();
+                    if (rect.bottom < 0 || rect.top > viewH) return;
+                    const progress = (viewH - rect.top) / (viewH + rect.height);
+                    const offset = (progress - 0.5) * 90;
+                    layer.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+                });
+                ticking = false;
+            }
+            function onScroll() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+            update();
+        })();
+        */
+
+        // Countdown Timer Logic
+        const weddingDate = new Date('November 1, 2026 16:30:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "<p class='col-span-4 text-2xl font-serif text-olive-800'>O grande dia chegou!</p>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(mins).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP → Google Apps Script (planilha + CSV no Drive)
+        const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzQBRmkiZA870a0CiTp6o-QmJ8dgRWzsky93les2JqXLmExcoCyqQ3nGL6Ar8EQF5Wf/exec';
+
+        (function initRsvpForm() {
+            const form = document.getElementById('rsvpForm');
+            const statusEl = document.getElementById('rsvpStatus');
+            const submitBtn = document.getElementById('rsvpSubmit');
+            const presencaEl = document.getElementById('rsvpPresenca');
+            const acompanhantesWrap = document.getElementById('rsvpAcompanhantesWrap');
+            const acompanhantesEl = document.getElementById('rsvpAcompanhantes');
+            const contatoEl = document.getElementById('rsvpContato');
+            if (!form) return;
+
+            function formatWhatsApp(value) {
+                const digits = value.replace(/\D/g, '').slice(0, 11);
+                if (!digits) return '';
+                if (digits.length <= 2) return `(${digits}`;
+                if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+                return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+            }
+
+            contatoEl.addEventListener('input', () => {
+                contatoEl.value = formatWhatsApp(contatoEl.value);
+            });
+
+            function toggleAcompanhantes() {
+                const vai = presencaEl.value === 'sim';
+                acompanhantesWrap.style.display = vai ? '' : 'none';
+                if (!vai) acompanhantesEl.value = '';
+            }
+            presencaEl.addEventListener('change', toggleAcompanhantes);
+            toggleAcompanhantes();
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const nome = form.nome.value.trim();
+                const contato = form.contato.value.trim();
+                const contatoDigits = contato.replace(/\D/g, '');
+                const presenca = form.presenca.value;
+                const acompanhantes = form.acompanhantes.value.trim();
+
+                if (!nome || !contato) {
+                    statusEl.textContent = 'Preencha nome e WhatsApp para enviar.';
+                    return;
+                }
+                if (contatoDigits.length !== 11) {
+                    statusEl.textContent = 'Informe o WhatsApp completo: DDD + 9 dígitos.';
+                    contatoEl.focus();
+                    return;
+                }
+                if (!RSVP_ENDPOINT) {
+                    statusEl.textContent = 'A planilha ainda está sendo conectada. Tente novamente em breve.';
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                statusEl.textContent = 'Enviando confirmação...';
+
+                const payload = {
+                    nome,
+                    contato,
+                    presenca: presenca === 'sim' ? 'Sim, confirmo minha presença!' : 'Infelizmente não poderei comparecer',
+                    acompanhantes: presenca === 'sim' ? acompanhantes : ''
+                };
+
+                try {
+                    await fetch(RSVP_ENDPOINT, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                    form.reset();
+                    toggleAcompanhantes();
+                    statusEl.textContent = 'Confirmação enviada. Obrigado!';
+                } catch (err) {
+                    statusEl.textContent = 'Não foi possível enviar agora. Tente novamente.';
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
