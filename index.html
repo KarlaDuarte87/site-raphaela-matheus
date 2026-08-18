@@ -427,14 +427,6 @@
             color: #fff;
         }
 
-        .pix-card {
-            margin-top: 2.5rem;
-            background: #fcfbfa;
-            border: 1px solid #e3ebe3;
-            border-radius: 1.35rem;
-            padding: 2.25rem 1.6rem 2rem;
-            box-shadow: 0 16px 40px rgba(55, 73, 55, 0.08);
-        }
         .pix-qr-frame {
             width: min(100%, 280px);
             margin: 1.6rem auto 0;
@@ -495,6 +487,215 @@
             background: #587458;
             border-color: #587458;
         }
+
+        .gifts-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+        }
+        .gifts-toolbar label {
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #759375;
+        }
+        .gifts-sort {
+            border: 1px solid #c5d5c5;
+            border-radius: 999px;
+            background: #fcfbfa;
+            color: #374937;
+            font-size: 0.78rem;
+            padding: 0.45rem 1rem;
+            cursor: pointer;
+        }
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .gifts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; }
+        }
+        @media (min-width: 1024px) {
+            .gifts-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        .gift-card {
+            background: #fcfbfa;
+            border: 1px solid #e3ebe3;
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .gift-card:hover {
+            box-shadow: 0 12px 28px rgba(55, 73, 55, 0.1);
+            transform: translateY(-2px);
+        }
+        .gift-card__img-wrap {
+            aspect-ratio: 1;
+            padding: 0.85rem;
+            background: #fff;
+            border-bottom: 1px solid #e3ebe3;
+        }
+        .gift-card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .gift-card__body {
+            padding: 0.95rem 0.75rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .gift-card__name {
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: #445b44;
+            flex: 1;
+            margin-bottom: 0.55rem;
+        }
+        .gift-card__price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: #2d3b2d;
+            margin-bottom: 0.75rem;
+        }
+        .gift-card__btn {
+            width: 100%;
+            border: 1px solid #445b44;
+            background: transparent;
+            color: #445b44;
+            border-radius: 999px;
+            padding: 0.55rem 0.75rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            transition: background 0.2s ease, color 0.2s ease;
+            cursor: pointer;
+        }
+        .gift-card__btn:hover {
+            background: #445b44;
+            color: #fff;
+        }
+        .gifts-load-more-wrap {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .gifts-load-more {
+            border: 1px solid #445b44;
+            background: transparent;
+            color: #445b44;
+            border-radius: 999px;
+            padding: 0.75rem 1.75rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .gifts-load-more:hover {
+            background: #445b44;
+            color: #fff;
+        }
+        .gifts-load-more.is-hidden {
+            display: none;
+        }
+        .gift-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 110;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .gift-modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .gift-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            border: 0;
+            background: rgba(37, 48, 37, 0.72);
+            cursor: pointer;
+        }
+        .gift-modal__panel {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 420px);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #fcfbfa;
+            border: 1px solid #e3ebe3;
+            border-radius: 1.35rem;
+            padding: 1.75rem 1.5rem 1.5rem;
+            box-shadow: 0 24px 56px rgba(37, 48, 37, 0.22);
+        }
+        .gift-modal__close {
+            position: absolute;
+            top: 0.85rem;
+            right: 0.85rem;
+            border: 0;
+            background: transparent;
+            color: #759375;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        .gift-modal__gift {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            text-align: left;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.15rem;
+            border-bottom: 1px dashed #c5d5c5;
+        }
+        .gift-modal__thumb {
+            width: 4.5rem;
+            height: 4.5rem;
+            object-fit: contain;
+            background: #fff;
+            border: 1px solid #e3ebe3;
+            border-radius: 0.75rem;
+            padding: 0.35rem;
+            flex-shrink: 0;
+        }
+        .gift-modal__title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: #2d3b2d;
+            line-height: 1.25;
+        }
+        .gift-modal__amount {
+            margin-top: 0.35rem;
+            font-size: 0.95rem;
+            color: #587458;
+        }
+        .gift-modal__hint {
+            font-size: 0.82rem;
+            color: #445b44;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .gift-modal .pix-qr-frame {
+            width: min(100%, 220px);
+            margin-top: 0.75rem;
+        }
+        .gift-modal .pix-meta {
+            margin-top: 1.25rem;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -544,7 +745,7 @@
         <div class="hero-welcome">
             <p>Criamos esse site para compartilhar com vocês os detalhes da organização do nosso casamento.</p>
             <p>Estamos muito felizes e contamos com a presença de todos no nosso grande dia! Aqui vocês encontrarão também dicas para hospedagem, salão de beleza, trajes, estacionamento, etc.</p>
-            <p>Para nos presentear, o Pix na Lista de Presentes é o nosso jeito simples de receber o carinho de vocês — no valor que fizer sentido para cada um.</p>
+            <p>Para nos presentear, escolham um item da Lista de Presentes e cliquem em Presentear.</p>
             <p>Fiquem à vontade!</p>
             <p>Aguardamos vocês no nosso grande dia!</p>
         </div>
@@ -619,32 +820,26 @@
     <div class="photo-window" data-scene="vivaro" aria-hidden="true"></div>
 
     <section id="presentes" class="py-24 px-4 bg-olive-50 border-t border-olive-100">
-        <div class="max-w-xl mx-auto text-center">
-            <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Para nos presentear</span>
-            <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-6">Lista de presentes</h2>
-            <p class="text-olive-700 leading-relaxed">A presença de vocês já é o nosso maior presente. Se quiserem contribuir para o nosso começo, o Pix abaixo é o nosso jeito simples de receber esse carinho — no valor que fizer sentido para cada um.</p>
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Para nos presentear</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-6">Lista de presentes</h2>
+                <p class="text-olive-700 leading-relaxed">A presença de vocês já é o nosso maior presente. Escolham um item da lista e cliquem em Presentear para ver o Pix com o valor sugerido.</p>
+            </div>
 
-            <div class="pix-card">
-                <p class="text-xs tracking-[0.28em] uppercase text-olive-500">Pix</p>
-                <div class="gold-line mx-auto mt-3" aria-hidden="true"></div>
-                <p class="text-olive-600 text-sm mt-4 leading-relaxed">Aponte a câmera do banco e informe o valor na hora de pagar.</p>
+            <div class="gifts-toolbar">
+                <label for="giftsSort">Ordenar por</label>
+                <select id="giftsSort" class="gifts-sort">
+                    <option value="name">A–Z</option>
+                    <option value="price-asc">Menor preço</option>
+                    <option value="price-desc">Maior preço</option>
+                </select>
+            </div>
 
-                <div class="pix-qr-frame">
-                    <img src="assets/pix-qr.png" alt="QR Code Pix para presentear Raphaela e Matheus" width="682" height="682" decoding="async">
-                </div>
+            <div id="giftsGrid" class="gifts-grid" aria-live="polite"></div>
 
-                <div class="pix-meta">
-                    <div class="pix-row">
-                        <span>Nome</span>
-                        <strong>Matheus Winter</strong>
-                    </div>
-                    <div class="pix-row">
-                        <span>Chave Pix</span>
-                        <strong id="pixKey">020.694.090-40</strong>
-                    </div>
-                </div>
-
-                <button type="button" class="pix-copy" id="copyPixBtn" data-pix="02069409040">Copiar chave Pix</button>
+            <div class="gifts-load-more-wrap">
+                <button type="button" class="gifts-load-more is-hidden" id="giftsLoadMore">Ver mais presentes</button>
             </div>
         </div>
     </section>
@@ -675,6 +870,37 @@
     </footer>
     </div>
 
+    <div id="giftModal" class="gift-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle">
+        <button type="button" class="gift-modal__backdrop" aria-label="Fechar"></button>
+        <div class="gift-modal__panel">
+            <button type="button" class="gift-modal__close" aria-label="Fechar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="gift-modal__gift">
+                <img class="gift-modal__thumb" src="" alt="">
+                <div>
+                    <h3 class="gift-modal__title" id="giftModalTitle"></h3>
+                    <p class="gift-modal__amount"></p>
+                </div>
+            </div>
+            <p class="gift-modal__hint">Aponte a câmera do banco para o QR Code e informe o valor do presente na hora de pagar.</p>
+            <div class="pix-qr-frame">
+                <img src="assets/pix-qr.png" alt="QR Code Pix para presentear Raphaela e Matheus" width="682" height="682" decoding="async">
+            </div>
+            <div class="pix-meta">
+                <div class="pix-row">
+                    <span>Nome</span>
+                    <strong>Matheus Winter</strong>
+                </div>
+                <div class="pix-row">
+                    <span>Chave Pix</span>
+                    <strong>020.694.090-40</strong>
+                </div>
+            </div>
+            <button type="button" class="pix-copy" id="giftModalCopyPix" data-pix="02069409040">Copiar chave Pix</button>
+        </div>
+    </div>
+
     <div id="photoLightbox" class="photo-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visualizar foto">
         <button type="button" class="photo-lightbox__backdrop" aria-label="Fechar"></button>
         <button type="button" class="photo-lightbox__close" aria-label="Fechar">
@@ -703,29 +929,165 @@
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
 
-        (function initPixCopy() {
-            const btn = document.getElementById('copyPixBtn');
-            if (!btn) return;
-            const original = btn.textContent;
-            btn.addEventListener('click', async () => {
-                const key = btn.dataset.pix || '';
-                try {
-                    await navigator.clipboard.writeText(key);
-                } catch {
-                    const field = document.createElement('textarea');
-                    field.value = key;
-                    document.body.appendChild(field);
-                    field.select();
-                    document.execCommand('copy');
-                    field.remove();
+        (function initGiftsList() {
+            const grid = document.getElementById('giftsGrid');
+            const sortSelect = document.getElementById('giftsSort');
+            const loadMoreBtn = document.getElementById('giftsLoadMore');
+            const modal = document.getElementById('giftModal');
+            if (!grid || !sortSelect) return;
+
+            const PAGE_SIZE = 12;
+            let gifts = [];
+            let visibleCount = PAGE_SIZE;
+            let lastFocus = null;
+
+            function sortGifts(list, mode) {
+                const sorted = [...list];
+                if (mode === 'price-asc') sorted.sort((a, b) => a.priceNum - b.priceNum);
+                else if (mode === 'price-desc') sorted.sort((a, b) => b.priceNum - a.priceNum);
+                else sorted.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+                return sorted;
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function updateLoadMore(sorted) {
+                if (!loadMoreBtn) return;
+                const remaining = sorted.length - visibleCount;
+                if (remaining <= 0) {
+                    loadMoreBtn.classList.add('is-hidden');
+                    return;
                 }
-                btn.textContent = 'Chave copiada';
-                btn.classList.add('is-copied');
-                setTimeout(() => {
-                    btn.textContent = original;
-                    btn.classList.remove('is-copied');
-                }, 2200);
+                loadMoreBtn.classList.remove('is-hidden');
+                loadMoreBtn.textContent = remaining > PAGE_SIZE
+                    ? `Ver mais presentes (${Math.min(PAGE_SIZE, remaining)} de ${remaining})`
+                    : `Ver mais presentes (${remaining})`;
+            }
+
+            function bindGiftButtons() {
+                grid.addEventListener('click', (event) => {
+                    const btn = event.target.closest('.gift-card__btn');
+                    if (!btn || !grid.contains(btn)) return;
+                    openGiftModal({
+                        name: btn.dataset.giftName,
+                        price: btn.dataset.giftPrice,
+                        img: btn.dataset.giftImg
+                    }, btn);
+                });
+            }
+
+            function render({ append = false, prevCount = 0 } = {}) {
+                const mode = sortSelect.value;
+                const sorted = sortGifts(gifts, mode);
+                const start = append ? prevCount : 0;
+                const slice = sorted.slice(start, visibleCount);
+                const cardsHtml = slice.map((gift) => `
+                    <article class="gift-card">
+                        <div class="gift-card__img-wrap">
+                            <img class="gift-card__img" src="${escapeHtml(gift.img)}" alt="${escapeHtml(gift.name)}" width="208" height="208" loading="lazy" decoding="async">
+                        </div>
+                        <div class="gift-card__body">
+                            <h3 class="gift-card__name">${escapeHtml(gift.name)}</h3>
+                            <p class="gift-card__price">${escapeHtml(gift.price)}</p>
+                            <button type="button" class="gift-card__btn" data-gift-name="${escapeHtml(gift.name)}" data-gift-price="${escapeHtml(gift.price)}" data-gift-img="${escapeHtml(gift.img)}">Presentear</button>
+                        </div>
+                    </article>
+                `).join('');
+
+                if (append) {
+                    grid.insertAdjacentHTML('beforeend', cardsHtml);
+                } else {
+                    grid.innerHTML = cardsHtml;
+                }
+
+                updateLoadMore(sorted);
+            }
+
+            function openGiftModal(gift, trigger) {
+                if (!modal) return;
+                lastFocus = trigger;
+                modal.querySelector('.gift-modal__thumb').src = gift.img;
+                modal.querySelector('.gift-modal__thumb').alt = gift.name;
+                modal.querySelector('.gift-modal__title').textContent = gift.name;
+                modal.querySelector('.gift-modal__amount').textContent = gift.price;
+                modal.hidden = false;
+                modal.setAttribute('aria-hidden', 'false');
+                modal.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                modal.querySelector('.gift-modal__close').focus();
+            }
+
+            function closeGiftModal() {
+                if (!modal) return;
+                modal.classList.remove('is-open');
+                modal.hidden = true;
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                lastFocus?.focus();
+            }
+
+            function bindModal() {
+                if (!modal) return;
+                modal.querySelector('.gift-modal__backdrop')?.addEventListener('click', closeGiftModal);
+                modal.querySelector('.gift-modal__close')?.addEventListener('click', closeGiftModal);
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeGiftModal();
+                });
+
+                const copyBtn = document.getElementById('giftModalCopyPix');
+                if (!copyBtn) return;
+                const original = copyBtn.textContent;
+                copyBtn.addEventListener('click', async () => {
+                    const key = copyBtn.dataset.pix || '';
+                    try {
+                        await navigator.clipboard.writeText(key);
+                    } catch {
+                        const field = document.createElement('textarea');
+                        field.value = key;
+                        document.body.appendChild(field);
+                        field.select();
+                        document.execCommand('copy');
+                        field.remove();
+                    }
+                    copyBtn.textContent = 'Chave copiada';
+                    copyBtn.classList.add('is-copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = original;
+                        copyBtn.classList.remove('is-copied');
+                    }, 2200);
+                });
+            }
+
+            sortSelect.addEventListener('change', () => {
+                visibleCount = PAGE_SIZE;
+                render();
             });
+
+            loadMoreBtn?.addEventListener('click', () => {
+                const prevCount = visibleCount;
+                visibleCount = Math.min(visibleCount + PAGE_SIZE, gifts.length);
+                if (visibleCount === prevCount) return;
+                render({ append: true, prevCount });
+            });
+
+            bindGiftButtons();
+            bindModal();
+
+            fetch('data/presentes.json')
+                .then((res) => res.json())
+                .then((data) => {
+                    gifts = data;
+                    render();
+                })
+                .catch(() => {
+                    grid.innerHTML = '<p class="col-span-full text-center text-sm text-olive-600 py-8">Não foi possível carregar a lista de presentes.</p>';
+                });
         })();
 
         (function initVivaroWallpaper() {

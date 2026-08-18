@@ -1,0 +1,488 @@
+[
+  {
+    "name": "Cartão presente (R$ 150)",
+    "price": "R$ 171,68",
+    "priceNum": 171.68,
+    "img": "assets/presentes/presente-150.png"
+  },
+  {
+    "name": "Cartão presente (R$ 100)",
+    "price": "R$ 114,45",
+    "priceNum": 114.45,
+    "img": "assets/presentes/presente-100.png"
+  },
+  {
+    "name": "Cartão presente (R$ 50)",
+    "price": "R$ 57,23",
+    "priceNum": 57.23,
+    "img": "assets/presentes/presente-50.png"
+  },
+  {
+    "name": "2 Passagens Aéreas para a Lua de Mel",
+    "price": "R$ 2.077,31",
+    "priceNum": 2077.31,
+    "img": "assets/presentes/2_passagens_aereas_lua_de_mel.jpg"
+  },
+  {
+    "name": "Abajur Decorativo",
+    "price": "R$ 256,21",
+    "priceNum": 256.21,
+    "img": "assets/presentes/abajur_decorativo.jpg"
+  },
+  {
+    "name": "Adega de Vinhos Climatizada",
+    "price": "R$ 1.661,85",
+    "priceNum": 1661.85,
+    "img": "assets/presentes/adega_vinhos_climatizada.jpg"
+  },
+  {
+    "name": "Aluguel de Carro para a Lua de Mel",
+    "price": "R$ 2.008,06",
+    "priceNum": 2008.06,
+    "img": "assets/presentes/aluguel_carro_lua_de_mel.jpg"
+  },
+  {
+    "name": "Aparador em Madeira Jequitibá 200 cm",
+    "price": "R$ 1.314,24",
+    "priceNum": 1314.24,
+    "img": "assets/presentes/aparador_madeira_jequitiba.jpg"
+  },
+  {
+    "name": "Aparelho de Fondue Preto",
+    "price": "R$ 152,34",
+    "priceNum": 152.34,
+    "img": "assets/presentes/aparelho_fondue_preto.jpg"
+  },
+  {
+    "name": "Aparelho de Jantar Branco - 30 Peças",
+    "price": "R$ 790,76",
+    "priceNum": 790.76,
+    "img": "assets/presentes/aparelho_de_jantar_branco.jpg"
+  },
+  {
+    "name": "Ar Condicionado Split Inverter 12000 BTUs",
+    "price": "R$ 2.629,87",
+    "priceNum": 2629.87,
+    "img": "assets/presentes/ar_condicionado_split.jpg"
+  },
+  {
+    "name": "Aspirador de Pó Vertical",
+    "price": "R$ 242,36",
+    "priceNum": 242.36,
+    "img": "assets/presentes/aspirador_po_vertical.jpg"
+  },
+  {
+    "name": "Bandeja Preta com Detalhe em Pesponto",
+    "price": "R$ 380,84",
+    "priceNum": 380.84,
+    "img": "assets/presentes/bandeja_preta_detalhe_pesponto.jpg"
+  },
+  {
+    "name": "Batedeira Planetária",
+    "price": "R$ 685,52",
+    "priceNum": 685.52,
+    "img": "assets/presentes/batedeira_planetaria.jpg"
+  },
+  {
+    "name": "Baú em Madeira Maciça  60x40 cm",
+    "price": "R$ 740,91",
+    "priceNum": 740.91,
+    "img": "assets/presentes/bau_madeira_macica.jpg"
+  },
+  {
+    "name": "Buffet 4 Portas cor Madeira Natural e Azul",
+    "price": "R$ 1.731,09",
+    "priceNum": 1731.09,
+    "img": "assets/presentes/buffet_4_portas_natural_azul.jpg"
+  },
+  {
+    "name": "Caixa Organizadora Trama com Tampa 40 x 30 cm",
+    "price": "R$ 263,13",
+    "priceNum": 263.13,
+    "img": "assets/presentes/caixa_organizadora_trama_com_tampa.jpg"
+  },
+  {
+    "name": "Carrinho Gourmet para Churrasco",
+    "price": "R$ 773,17",
+    "priceNum": 773.17,
+    "img": "assets/presentes/carrinho_gourmet_churrasco.jpg"
+  },
+  {
+    "name": "Centrifuga de Suco com Jarra",
+    "price": "R$ 401,61",
+    "priceNum": 401.61,
+    "img": "assets/presentes/centrifuga_de_suco.jpg"
+  },
+  {
+    "name": "Churrasqueira Elétrica",
+    "price": "R$ 429,31",
+    "priceNum": 429.31,
+    "img": "assets/presentes/churrasqueira_eletrica.jpg"
+  },
+  {
+    "name": "Coifa de Parede",
+    "price": "R$ 914,02",
+    "priceNum": 914.02,
+    "img": "assets/presentes/coifa_de_parede.jpg"
+  },
+  {
+    "name": "Conjunto 2 Cadeiras Estofadas cor Areia",
+    "price": "R$ 567,80",
+    "priceNum": 567.8,
+    "img": "assets/presentes/conjunto_2_cadeiras_estofadas_cor_areia.jpg"
+  },
+  {
+    "name": "Conjunto de Bowl em Cerâmica - 6 peças",
+    "price": "R$ 90,65",
+    "priceNum": 90.65,
+    "img": "assets/presentes/conjunto_bowl_ceramica.jpg"
+  },
+  {
+    "name": "Conjunto de Mesas Laterais",
+    "price": "R$ 713,21",
+    "priceNum": 713.21,
+    "img": "assets/presentes/conjunto_mesas_laterais.jpg"
+  },
+  {
+    "name": "Cooktop a Gás com Quatro Bocas",
+    "price": "R$ 1.911,12",
+    "priceNum": 1911.12,
+    "img": "assets/presentes/cooktop_a_gas_quatro_bocas.jpg"
+  },
+  {
+    "name": "Cortador de Pizza com Cabo de Bambu",
+    "price": "R$ 78,06",
+    "priceNum": 78.06,
+    "img": "assets/presentes/cortador_de_pizza_cabo_de_bambu.jpg"
+  },
+  {
+    "name": "Cota Jantar Romântico para o Casal",
+    "price": "R$ 290,82",
+    "priceNum": 290.82,
+    "img": "assets/presentes/cota_jantar_romantico_para_casal.jpg"
+  },
+  {
+    "name": "Cômoda Vermelha com 3 Gavetas",
+    "price": "R$ 1.357,17",
+    "priceNum": 1357.17,
+    "img": "assets/presentes/comoda_vermelha_3_gavetas.jpg"
+  },
+  {
+    "name": "Decanter Vidro 1,25ml",
+    "price": "R$ 152,34",
+    "priceNum": 152.34,
+    "img": "assets/presentes/decanter_para_vinho.jpg"
+  },
+  {
+    "name": "Escorredor de Pratos Dobrável em Bambu",
+    "price": "R$ 214,66",
+    "priceNum": 214.66,
+    "img": "assets/presentes/escorredor_pratos_dobravel_bambu.jpg"
+  },
+  {
+    "name": "Escrivaninha Branca com Gaveta",
+    "price": "R$ 559,48",
+    "priceNum": 559.48,
+    "img": "assets/presentes/escrivaninha_branca_gaveta.jpg"
+  },
+  {
+    "name": "Espelho Redondo 40 cm com Alça em Couro",
+    "price": "R$ 366,98",
+    "priceNum": 366.98,
+    "img": "assets/presentes/espelho_redondo_alca_couro.jpg"
+  },
+  {
+    "name": "Estante Nichos Branca e Grafite",
+    "price": "R$ 1.156,37",
+    "priceNum": 1156.37,
+    "img": "assets/presentes/estante_nichos_branca_grafite.jpg"
+  },
+  {
+    "name": "Faqueiro - 42 Peças",
+    "price": "R$ 358,68",
+    "priceNum": 358.68,
+    "img": "assets/presentes/faqueiro_42_peças.jpg"
+  },
+  {
+    "name": "Ferro de Passar a Vapor",
+    "price": "R$ 71,76",
+    "priceNum": 71.76,
+    "img": "assets/presentes/ferro_de_passar_a_vapor.jpg"
+  },
+  {
+    "name": "Forno de Embutir Elétrico 47 litros com Timer",
+    "price": "R$ 1.100,98",
+    "priceNum": 1100.98,
+    "img": "assets/presentes/forno_embutir_eletrico_47_litros.jpg"
+  },
+  {
+    "name": "Forno Elétrico 46 litros",
+    "price": "R$ 386,38",
+    "priceNum": 386.38,
+    "img": "assets/presentes/forno_eletrico_46_litros.jpg"
+  },
+  {
+    "name": "Frigideira Antiaderente",
+    "price": "R$ 123,25",
+    "priceNum": 123.25,
+    "img": "assets/presentes/frigideira_antiaderente.jpg"
+  },
+  {
+    "name": "Fritadeira Air Fryer 3,2 litros",
+    "price": "R$ 390,53",
+    "priceNum": 390.53,
+    "img": "assets/presentes/fritadeira_air_fryer.jpg"
+  },
+  {
+    "name": "Geladeira Frost Free French Door 3 Portas  110V",
+    "price": "R$ 5.816,46",
+    "priceNum": 5816.46,
+    "img": "assets/presentes/geladeira_frost_free_french_door.jpg"
+  },
+  {
+    "name": "Home Theater Wireless",
+    "price": "R$ 733,98",
+    "priceNum": 733.98,
+    "img": "assets/presentes/home_theater_wireless.jpg"
+  },
+  {
+    "name": "Jogo de Cama Listrado",
+    "price": "R$ 180,03",
+    "priceNum": 180.03,
+    "img": "assets/presentes/jogo_de_cama_listrado.jpg"
+  },
+  {
+    "name": "Jogo de Facas - 3 Peças",
+    "price": "R$ 56,65",
+    "priceNum": 56.65,
+    "img": "assets/presentes/jogo_de_facas.jpg"
+  },
+  {
+    "name": "Jogo de Facas com Suporte em Madeira - 7 peças",
+    "price": "R$ 491,63",
+    "priceNum": 491.63,
+    "img": "assets/presentes/jogo_de_facas_suporte_madeira.jpg"
+  },
+  {
+    "name": "Jogo de Panelas Preto - 5 Peças",
+    "price": "R$ 955,56",
+    "priceNum": 955.56,
+    "img": "assets/presentes/jogo_panelas_5_pecas_preto.jpg"
+  },
+  {
+    "name": "Jogo de Taças de Cristal - 6 Peças",
+    "price": "R$ 206,35",
+    "priceNum": 206.35,
+    "img": "assets/presentes/jogo_tacas_cristal_6_pecas.jpg"
+  },
+  {
+    "name": "Jogo de Taças para Sobremesa - 8 peças",
+    "price": "R$ 323,00",
+    "priceNum": 323,
+    "img": "assets/presentes/jogo_tacas_sobremesa_8_pecas.jpg"
+  },
+  {
+    "name": "Jogo de Vasos em Cerâmica",
+    "price": "R$ 475,01",
+    "priceNum": 475.01,
+    "img": "assets/presentes/jogo_vasos_ceramica.jpg"
+  },
+  {
+    "name": "Jogo de Xícaras para Café com Pires - 12 peças",
+    "price": "R$ 324,70",
+    "priceNum": 324.7,
+    "img": "assets/presentes/jogo_xicaras_para_cafe_com_pires.jpg"
+  },
+  {
+    "name": "Jogo Edredom Casal Cinza - 3 Peças",
+    "price": "R$ 623,19",
+    "priceNum": 623.19,
+    "img": "assets/presentes/jogo_edredom_cinza.jpg"
+  },
+  {
+    "name": "Jogo Toalha de Banho Azul - 4 Peças",
+    "price": "R$ 152,34",
+    "priceNum": 152.34,
+    "img": "assets/presentes/jogo_toalha_banho_azul_4_pecas.jpg"
+  },
+  {
+    "name": "Kit Colher de Bambu  - 3 Peças",
+    "price": "R$ 44,06",
+    "priceNum": 44.06,
+    "img": "assets/presentes/kit_colher_de_bambu.jpg"
+  },
+  {
+    "name": "Lanterna Decorativa Boho em Bambu",
+    "price": "R$ 332,37",
+    "priceNum": 332.37,
+    "img": "assets/presentes/lanterna_decorativa_boho_bambu.jpg"
+  },
+  {
+    "name": "Lava Louças em Inox 14 Serviços",
+    "price": "R$ 4.694,71",
+    "priceNum": 4694.71,
+    "img": "assets/presentes/lava_louca_inox_14_servicos.jpg"
+  },
+  {
+    "name": "Lixeira Inox  3 litros",
+    "price": "R$ 62,95",
+    "priceNum": 62.95,
+    "img": "assets/presentes/lixeira_inox_3_litros.jpg"
+  },
+  {
+    "name": "Manta Tricot Cinza 125cm x 150cm",
+    "price": "R$ 408,54",
+    "priceNum": 408.54,
+    "img": "assets/presentes/manta_tricot_cinza.jpg"
+  },
+  {
+    "name": "Maquina de Macarrão e Massas Caseira",
+    "price": "R$ 263,13",
+    "priceNum": 263.13,
+    "img": "assets/presentes/maquina_macarrao_e_massas_caseira.jpg"
+  },
+  {
+    "name": "Mesa de Centro Retangular Retrô Bege/Madeira",
+    "price": "R$ 228,51",
+    "priceNum": 228.51,
+    "img": "assets/presentes/mesa_centro_retangular_retro.jpg"
+  },
+  {
+    "name": "Mesa de Jantar Redonda",
+    "price": "R$ 1.132,83",
+    "priceNum": 1132.83,
+    "img": "assets/presentes/mesa_de_jantar_redonda_madeira.jpg"
+  },
+  {
+    "name": "Microondas 30 Litros Branco",
+    "price": "R$ 574,73",
+    "priceNum": 574.73,
+    "img": "assets/presentes/microondas_30_litros_branco.jpg"
+  },
+  {
+    "name": "Mixer 3 em 1 Vermelho",
+    "price": "R$ 234,04",
+    "priceNum": 234.04,
+    "img": "assets/presentes/mixer-vermelho-com-utensilios.jpg"
+  },
+  {
+    "name": "Máquina de Café Expresso",
+    "price": "R$ 450,09",
+    "priceNum": 450.09,
+    "img": "assets/presentes/maquina-de-cafe.jpg"
+  },
+  {
+    "name": "Panela de Arroz Elétrica",
+    "price": "R$ 137,10",
+    "priceNum": 137.1,
+    "img": "assets/presentes/panela_arroz_eletrica.jpg"
+  },
+  {
+    "name": "Passadeira Turca 80x240 cm",
+    "price": "R$ 1.038,65",
+    "priceNum": 1038.65,
+    "img": "assets/presentes/passadeira_turca.jpg"
+  },
+  {
+    "name": "Patrocine a lua de mel dos noivos",
+    "price": "R$ 13.848,72",
+    "priceNum": 13848.72,
+    "img": "assets/presentes/patrocine_a_lua_de_mel.jpg"
+  },
+  {
+    "name": "Pipoqueira Elétrica sem Óleo",
+    "price": "R$ 249,28",
+    "priceNum": 249.28,
+    "img": "assets/presentes/pipoqueira_eletrica_sem_oleo.jpg"
+  },
+  {
+    "name": "Poltrona Estofada Areia em Madeira",
+    "price": "R$ 900,17",
+    "priceNum": 900.17,
+    "img": "assets/presentes/poltrona_madeira_areia.jpg"
+  },
+  {
+    "name": "Porta Condimentos com Base Giratória em Madeira",
+    "price": "R$ 207,73",
+    "priceNum": 207.73,
+    "img": "assets/presentes/porta_condimentos_bambu.jpg"
+  },
+  {
+    "name": "Porta Doce de Porcelana 2 Níveis",
+    "price": "R$ 184,18",
+    "priceNum": 184.18,
+    "img": "assets/presentes/porta_doce_porcelana.jpg"
+  },
+  {
+    "name": "Processador de Alimentos Preto - 800W",
+    "price": "R$ 432,07",
+    "priceNum": 432.07,
+    "img": "assets/presentes/processador_preto_800w.jpg"
+  },
+  {
+    "name": "Puff Tricot Capuccino",
+    "price": "R$ 503,49",
+    "priceNum": 503.49,
+    "img": "assets/presentes/puff_tricot_capuccino.jpg"
+  },
+  {
+    "name": "Quadro Decorativo",
+    "price": "R$ 467,62",
+    "priceNum": 467.62,
+    "img": "assets/presentes/quadro_decorativo.jpg"
+  },
+  {
+    "name": "Rack Off White 2.2m",
+    "price": "R$ 2.201,95",
+    "priceNum": 2201.95,
+    "img": "assets/presentes/rack_off_white.jpg"
+  },
+  {
+    "name": "Sapateira Compacta em Madeira",
+    "price": "R$ 638,42",
+    "priceNum": 638.42,
+    "img": "assets/presentes/sapateira_compacta_madeira.jpg"
+  },
+  {
+    "name": "Smart TV LED 40 Polegadas",
+    "price": "R$ 1.869,58",
+    "priceNum": 1869.58,
+    "img": "assets/presentes/smart_tv_led_40_polegadas.jpg"
+  },
+  {
+    "name": "Sofá Estofado Grafite 3 lugares",
+    "price": "R$ 3.462,18",
+    "priceNum": 3462.18,
+    "img": "assets/presentes/sofa_estofado_grafite.jpg"
+  },
+  {
+    "name": "Suporte para Bolo",
+    "price": "R$ 152,34",
+    "priceNum": 152.34,
+    "img": "assets/presentes/suporte_para_bolo.jpg"
+  },
+  {
+    "name": "Tapete Persa  Artesanal 1,49x2,05cm",
+    "price": "R$ 7.727,58",
+    "priceNum": 7727.58,
+    "img": "assets/presentes/tapete_persa_artesanal.jpg"
+  },
+  {
+    "name": "Vale Passeio de Balão",
+    "price": "R$ 483,32",
+    "priceNum": 483.32,
+    "img": "assets/presentes/vale_passeio_balao.jpg"
+  },
+  {
+    "name": "Vale Passeio de Barco",
+    "price": "R$ 346,22",
+    "priceNum": 346.22,
+    "img": "assets/presentes/vale_passeio_barco.jpg"
+  },
+  {
+    "name": "Vale Sessão de Massagem para o Casal",
+    "price": "R$ 436,24",
+    "priceNum": 436.24,
+    "img": "assets/presentes/vale_sessao_massagem_para_o_casal.jpg"
+  }
+]
