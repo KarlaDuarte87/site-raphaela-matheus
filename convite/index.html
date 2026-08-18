@@ -415,7 +415,8 @@
 </head>
 <body class="overflow-x-hidden relative">
 
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
+        <source src="assets/audio/audio.mp3" type="audio/mpeg">
         <source src="assets/audio/audio.webm" type="audio/webm">
     </audio>
 
@@ -429,10 +430,10 @@
         </button>
         <!-- Sound Toggle -->
         <button id="soundToggleBtn" onclick="toggleSound()" title="Ligar/Desligar Música" class="w-12 h-12 bg-olive-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-olive-700 transition transform hover:scale-105 active:scale-95 group relative">
-            <svg id="soundIconOn" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg id="soundIconOn" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
             </svg>
-            <svg id="soundIconOff" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg id="soundIconOff" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
             </svg>
@@ -689,23 +690,35 @@
         const bgMusic = document.getElementById('bgMusic');
         let isPlaying = false;
 
-        function toggleSound() {
+        function setSoundIcons(playing) {
             const iconOn = document.getElementById('soundIconOn');
             const iconOff = document.getElementById('soundIconOff');
-            
+            if (!iconOn || !iconOff) return;
+            iconOn.classList.toggle('hidden', !playing);
+            iconOff.classList.toggle('hidden', playing);
+        }
+
+        function playMusic() {
+            if (!bgMusic) return Promise.resolve();
+            bgMusic.playsInline = true;
+            bgMusic.muted = false;
+            bgMusic.volume = 0.5;
+            return bgMusic.play().then(() => {
+                isPlaying = true;
+                setSoundIcons(true);
+            }).catch(() => {
+                isPlaying = false;
+                setSoundIcons(false);
+            });
+        }
+
+        function toggleSound() {
             if (isPlaying) {
                 bgMusic.pause();
                 isPlaying = false;
-                iconOn.classList.add('hidden');
-                iconOff.classList.remove('hidden');
+                setSoundIcons(false);
             } else {
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    iconOn.classList.remove('hidden');
-                    iconOff.classList.add('hidden');
-                }).catch(e => {
-                    console.log("Audio autoplay prevented:", e);
-                });
+                playMusic();
             }
         }
 
@@ -714,12 +727,8 @@
             const mainContent = document.getElementById('mainContent');
             if (welcomeScreen.classList.contains('is-opening')) return;
 
-            bgMusic.volume = 0.5;
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                document.getElementById('soundIconOn').classList.remove('hidden');
-                document.getElementById('soundIconOff').classList.add('hidden');
-            }).catch(e => console.log(e));
+            // iOS só libera áudio no mesmo toque do usuário
+            playMusic();
 
             welcomeScreen.classList.add('is-opening');
             setTimeout(() => {
@@ -732,6 +741,11 @@
         // Auto Scroll Toggle Logic
         let autoScrollActive = false;
         let scrollInterval = null;
+        let ignoreUserScrollUntil = 0;
+
+        function getScrollEl() {
+            return document.scrollingElement || document.documentElement;
+        }
 
         function toggleAutoScroll() {
             if (autoScrollActive) {
@@ -742,28 +756,42 @@
         }
 
         function startAutoScroll() {
+            if (scrollInterval) clearInterval(scrollInterval);
             autoScrollActive = true;
+            ignoreUserScrollUntil = Date.now() + 1800;
             const scrollBtn = document.getElementById('autoScrollBtn');
-            scrollBtn.classList.add('ring-4', 'ring-olive-300');
-            
+            if (scrollBtn) scrollBtn.classList.add('ring-4', 'ring-olive-300');
+            document.documentElement.classList.remove('scroll-smooth');
+
             scrollInterval = setInterval(() => {
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+                const el = getScrollEl();
+                const max = el.scrollHeight - el.clientHeight;
+                if (max <= 2) return;
+                if (el.scrollTop >= max - 2) {
                     stopAutoScroll();
                     return;
                 }
-                window.scrollBy({ top: 1, behavior: 'smooth' });
-            }, 30);
+                el.scrollTop += 1;
+            }, 20);
         }
 
         function stopAutoScroll() {
             autoScrollActive = false;
             clearInterval(scrollInterval);
+            scrollInterval = null;
+            document.documentElement.classList.add('scroll-smooth');
             const scrollBtn = document.getElementById('autoScrollBtn');
-            scrollBtn.classList.remove('ring-4', 'ring-olive-300');
+            if (scrollBtn) scrollBtn.classList.remove('ring-4', 'ring-olive-300');
         }
 
-        window.addEventListener('wheel', () => { if (autoScrollActive) stopAutoScroll(); });
-        window.addEventListener('touchstart', () => { if (autoScrollActive) stopAutoScroll(); });
+        function onUserInterruptScroll() {
+            if (!autoScrollActive) return;
+            if (Date.now() < ignoreUserScrollUntil) return;
+            stopAutoScroll();
+        }
+
+        window.addEventListener('wheel', onUserInterruptScroll, { passive: true });
+        window.addEventListener('touchmove', onUserInterruptScroll, { passive: true });
 
         /*
         (function initParallax() {
