@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual dos Padrinhos — Raphaela & Matheus</title>
+    <meta name="description" content="Manual dos Padrinhos do casamento de Raphaela e Matheus. Informações sobre trajes, horários e orientações para o grande dia.">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <meta property="og:title" content="Manual dos Padrinhos — Raphaela & Matheus">
+    <meta property="og:description" content="Informações exclusivas para os padrinhos do casamento de Raphaela e Matheus.">
+    <meta property="og:image" content="https://www.raphaelazanin.com.br/assets/og-rm.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: {
+                            50: '#f4f7f4',
+                            100: '#e3ebe3',
+                            200: '#c5d5c5',
+                            300: '#9db49d',
+                            400: '#759375',
+                            500: '#587458',
+                            600: '#445b44',
+                            700: '#374937',
+                            800: '#2d3b2d',
+                            900: '#253025',
+                        },
+                        cream: '#fcfbfa',
+                        gold: '#c5a059',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar { display: none; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfbfa;
+            color: #374937;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar { display: none; }
+        h1, h2, h3, .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .gold-line { width: 3.5rem; height: 1px; background: rgba(197, 160, 89, 0.85); }
+        .color-swatch {
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Nav -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-cream shadow-[0_8px_24px_rgba(55,73,55,0.06)]">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 px-4 py-4">
+            <a href="#home" class="shrink-0">
+                <img class="h-5 w-auto block" src="../assets/logo-nav.png" alt="Raphaela & Matheus" width="182" height="91" decoding="async">
+            </a>
+            <nav class="hidden md:flex items-center gap-6" id="desktopNav">
+                <a href="#mensagem" class="text-[0.68rem] uppercase tracking-[0.16em] text-olive-700 hover:text-gold transition">Mensagem</a>
+                <a href="#traje-feminino" class="text-[0.68rem] uppercase tracking-[0.16em] text-olive-700 hover:text-gold transition">Traje Feminino</a>
+                <a href="#traje-masculino" class="text-[0.68rem] uppercase tracking-[0.16em] text-olive-700 hover:text-gold transition">Traje Masculino</a>
+                <a href="#informacoes" class="text-[0.68rem] uppercase tracking-[0.16em] text-olive-700 hover:text-gold transition">Informações</a>
+            </nav>
+            <button type="button" id="menuBtn" class="md:hidden text-olive-800" aria-label="Abrir menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-cream border-t border-olive-100 px-4 py-4 space-y-3">
+            <a href="#mensagem" class="block text-[0.68rem] uppercase tracking-[0.16em] text-olive-700">Mensagem</a>
+            <a href="#traje-feminino" class="block text-[0.68rem] uppercase tracking-[0.16em] text-olive-700">Traje Feminino</a>
+            <a href="#traje-masculino" class="block text-[0.68rem] uppercase tracking-[0.16em] text-olive-700">Traje Masculino</a>
+            <a href="#informacoes" class="block text-[0.68rem] uppercase tracking-[0.16em] text-olive-700">Informações</a>
+        </div>
+    </header>
+
+    <!-- Hero / Capa -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-28 pb-20 relative bg-gradient-to-b from-[#e8eee6] via-olive-50 to-[#f2f5f0]">
+        <div class="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#759375_1px,transparent_1px)] [background-size:18px_18px] pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+            <img src="../assets/logo-hero.png" alt="Raphaela & Matheus" class="w-[min(80vw,380px)] h-auto mx-auto mb-4" decoding="async">
+            <span class="block text-xs tracking-[0.4em] uppercase text-olive-500 font-medium">01 de Novembro de 2026</span>
+            <h1 class="text-5xl md:text-6xl font-serif text-olive-800 leading-tight">Manual dos<br>Padrinhos</h1>
+            <div class="gold-line mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Mensagem -->
+    <section id="mensagem" class="py-20 px-4 bg-cream border-t border-olive-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <blockquote class="text-olive-800 font-medium text-base md:text-lg leading-relaxed italic border-l-4 border-gold pl-6 text-left">
+                "Um amigo fiel é uma poderosa proteção: quem o achou, descobriu um tesouro."
+                <cite class="block mt-2 text-sm not-italic text-olive-500">(Eclesiástico 6:14)</cite>
+            </blockquote>
+
+            <div class="mt-10 text-olive-700 text-sm md:text-base leading-relaxed space-y-5 text-left">
+                <p>Queridos padrinhos,</p>
+                <p>Este versículo resume perfeitamente o motivo de terem sido os escolhidos: vocês são o nosso tesouro mais valioso e a nossa rede de proteção mais segura.</p>
+                <p>Para nós, o papel de um padrinho vai muito além de testemunhar um dia de festa. Significa ser abrigo nas tempestades, conselho nas dúvidas e alegria nas celebrações. Escolhemos vocês porque enxergamos em suas vidas o verdadeiro reflexo da fidelidade e do amor de Deus.</p>
+                <p>Este manual foi feito com muito carinho para que vocês nos acompanhem em cada detalhe até o grande dia. Mas, acima de tudo, ele é um convite para que continuem caminhando ao nosso lado por toda a vida, nos ajudando a proteger e a abençoar a nova família.</p>
+            </div>
+
+            <div class="mt-12">
+                <h2 class="text-3xl md:text-4xl font-serif text-olive-800">Vocês aceitam ser nossos padrinhos?</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traje Feminino -->
+    <section id="traje-feminino" class="py-20 px-4 bg-olive-50 border-t border-olive-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-serif text-olive-800 mb-6">Traje Feminino</h2>
+            <div class="gold-line mx-auto mb-10"></div>
+
+            <div class="text-olive-700 text-sm md:text-base leading-relaxed space-y-5">
+                <p>Querida Madrinha,<br>Para que você se sinta ainda mais linda e em harmonia com o nosso altar, preparamos algumas orientações para o seu visual:</p>
+                <p>Sugerimos tecidos sem estampas para manter o padrão.</p>
+                <p><strong>O Comprimento:</strong> Longo, para trazer toda a elegância que o momento pede.</p>
+                <p><strong>Evite:</strong> Branco, off-white, preto e tons muito próximos ao vestido da noiva.</p>
+            </div>
+
+            <div class="mt-10">
+                <p class="text-olive-700 text-base">A Paleta: <strong class="text-olive-800 text-lg">Escolhemos a cor Verde Oliva.</strong></p>
+            </div>
+
+            <div class="mt-8">
+                <p class="text-sm uppercase tracking-wider text-olive-500 mb-3 font-medium">Paleta de cores</p>
+                <div class="flex gap-3 justify-center">
+                    <span class="color-swatch" style="background: #a3b86c;"></span>
+                    <span class="color-swatch" style="background: #6b7f2a;"></span>
+                    <span class="color-swatch" style="background: #4a5e23;"></span>
+                    <span class="color-swatch" style="background: #3d4f1e;"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiração Madrinhas -->
+    <section class="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <img src="../assets/padrinhos/paleta-de-cores-madrinhas.png" alt="Inspiração de vestidos para madrinhas em tons de verde oliva" class="absolute inset-0 w-full h-full object-cover object-[center_70%]" decoding="async" loading="lazy">
+    </section>
+
+    <!-- Traje Masculino -->
+    <section id="traje-masculino" class="py-20 px-4 bg-cream border-t border-olive-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-serif text-olive-800 mb-6">Traje Masculino</h2>
+            <div class="gold-line mx-auto mb-10"></div>
+
+            <div class="text-olive-700 text-sm md:text-base leading-relaxed space-y-5">
+                <p>Querido Padrinho,<br>Para o grande dia, queremos que você esteja alinhado e confortável. Combinamos o seguinte padrão para os nossos protetores:</p>
+                <p><strong>A Camisa:</strong> Branca social clássica, de manga longa.</p>
+                <p><strong>A Gravata:</strong> Modelo que enviamos de presente junto com este manual.</p>
+            </div>
+
+            <div class="mt-10">
+                <p class="text-olive-700 text-base">O Terno: <strong class="text-olive-800 text-lg">Cor Cinza Grafite.</strong></p>
+            </div>
+
+            <div class="mt-8">
+                <p class="text-sm uppercase tracking-wider text-olive-500 mb-3 font-medium">Paleta de cores</p>
+                <div class="flex gap-3 justify-center">
+                    <span class="color-swatch" style="background: #1a1a1a;"></span>
+                    <span class="color-swatch" style="background: #3d3d3d;"></span>
+                    <span class="color-swatch" style="background: #5c5c5c;"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiração Padrinhos -->
+    <section class="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <img src="../assets/padrinhos/paleta-de-cores-padrinhos.png" alt="Inspiração de traje para padrinhos em cinza grafite" class="absolute inset-0 w-full h-full object-cover object-[center_30%]" decoding="async" loading="lazy">
+    </section>
+
+    <!-- Informações do Dia -->
+    <section id="informacoes" class="py-20 px-4 text-white text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-olive-800"></div>
+        <div class="max-w-3xl mx-auto relative z-10 space-y-8">
+            <h2 class="text-3xl md:text-4xl font-serif">Informações do Dia</h2>
+            <div class="gold-line mx-auto"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-left">
+                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/15">
+                    <h3 class="font-serif text-2xl mb-2 text-white">O Grande Dia</h3>
+                    <p class="text-sm text-olive-100"><strong>01/11/2026</strong></p>
+                    <p class="text-sm text-olive-200 mt-1">A cerimônia começará pontualmente às 16:30h.</p>
+                </div>
+                <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/15">
+                    <h3 class="font-serif text-2xl mb-2 text-white">Chegada dos Padrinhos</h3>
+                    <p class="text-sm text-olive-100"><strong>16:00h</strong></p>
+                    <p class="text-sm text-olive-200 mt-1">Pedimos que cheguem com 30 minutos de antecedência para organização do cortejo.</p>
+                </div>
+            </div>
+
+            <div class="bg-olive-900/50 p-6 rounded-2xl border border-white/15 mt-6 text-left max-w-xl mx-auto">
+                <h3 class="font-serif text-2xl mb-2 text-white">Local</h3>
+                <p class="text-sm text-olive-100"><strong>Buffet Vivaro (Salão Florença)</strong></p>
+                <p class="text-sm text-olive-200 mt-1">Av. Virgílio Manilia, 21784 - Jardim Ouro Cola, Maringá.</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Buffet+Vivaro+Av+Virgilio+Manilia+21784+Maringa" target="_blank" rel="noopener" class="inline-block mt-3 text-xs uppercase tracking-wider text-gold hover:text-white transition">Ver no Google Maps &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA para site principal -->
+    <section class="py-16 px-4 bg-olive-50 border-t border-olive-100 text-center">
+        <div class="max-w-xl mx-auto space-y-6">
+            <span class="text-xs uppercase tracking-[0.3em] text-olive-500">Mais detalhes</span>
+            <h2 class="text-3xl font-serif text-olive-800">Site Oficial do Casamento</h2>
+            <p class="text-olive-600 text-sm leading-relaxed">Para ver hospedagens, lista de presentes e tudo sobre o grande dia:</p>
+            <a href="../" class="inline-flex items-center gap-3 px-8 py-4 bg-olive-600 hover:bg-olive-500 text-white font-medium text-sm uppercase tracking-wider rounded-full shadow-lg transition transform hover:scale-105">
+                Acessar o site do casamento
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-10 bg-olive-900 text-olive-300 text-center text-xs tracking-widest">
+        <p class="font-serif text-lg text-olive-100 mb-2">Raphaela & Matheus</p>
+        <p>Com amor, 1º de novembro de 2026</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+    </script>
+</body>
+</html>
