@@ -896,6 +896,25 @@
                 <span class="text-xs tracking-[0.32em] uppercase text-olive-500">Para nos presentear</span>
                 <h2 class="text-4xl md:text-5xl font-serif text-olive-800 mt-3 mb-6">Lista de presentes</h2>
                 <p class="text-olive-700 leading-relaxed">A presença de vocês já é o nosso maior presente. Escolham um item da lista e cliquem em Presentear para ver o Pix com o valor sugerido.</p>
+
+                <!-- Pix fixo -->
+                <div class="mt-10 bg-white border border-olive-100 rounded-2xl p-8 max-w-sm mx-auto shadow-sm">
+                    <p class="text-xs uppercase tracking-[0.16em] text-olive-500 mb-4">Pix direto</p>
+                    <div class="pix-qr-frame">
+                        <img src="assets/pix-qr.png" alt="QR Code Pix para presentear Raphaela e Matheus" width="682" height="682" decoding="async">
+                    </div>
+                    <div class="pix-meta">
+                        <div class="pix-row">
+                            <span>Nome</span>
+                            <strong>Matheus Winter</strong>
+                        </div>
+                        <div class="pix-row">
+                            <span>Chave Pix</span>
+                            <strong>020.694.090-40</strong>
+                        </div>
+                    </div>
+                    <button type="button" class="pix-copy mt-4" onclick="copyPixKey(this)" data-pix="02069409040">Copiar chave Pix</button>
+                </div>
             </div>
 
             <div class="gifts-toolbar">
@@ -993,6 +1012,25 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
+        function copyPixKey(btn) {
+            const key = btn.dataset.pix || '';
+            const original = btn.textContent;
+            navigator.clipboard.writeText(key).catch(() => {
+                const field = document.createElement('textarea');
+                field.value = key;
+                document.body.appendChild(field);
+                field.select();
+                document.execCommand('copy');
+                field.remove();
+            });
+            btn.textContent = 'Chave copiada';
+            btn.classList.add('is-copied');
+            setTimeout(() => {
+                btn.textContent = original;
+                btn.classList.remove('is-copied');
+            }, 2200);
+        }
+
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
