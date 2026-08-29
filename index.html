@@ -1662,7 +1662,7 @@
             if (!mapEl || typeof L === 'undefined') return;
 
             const map = L.map(mapEl, { scrollWheelZoom: false }).setView([-23.42, -51.95], 12);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2je3_1_3a64b08166b9e953b7721574', {
                 attribution: '&copy; OpenStreetMap &copy; CARTO',
                 maxZoom: 19
             }).addTo(map);
