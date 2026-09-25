@@ -64,6 +64,26 @@
         .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; }
         #formStatus { min-height: 1.4rem; }
         .hint { font-size: 0.95rem; }
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(55, 73, 55, 0.35);
+        }
+        .modal[hidden] { display: none; }
+        .modal-card {
+            width: 100%;
+            max-width: 22rem;
+            padding: 1.4rem 1.3rem 1.2rem;
+            background: #fcfbfa;
+            border-radius: 1rem;
+            box-shadow: 0 12px 40px rgba(55, 73, 55, 0.18);
+        }
+        .modal-card p { margin: 0 0 1.1rem; color: #374937; font-size: 1.15rem; }
     </style>
 </head>
 <body>
@@ -78,6 +98,15 @@
     <h2>Pessoas</h2>
     <ul id="list"></ul>
     <p class="hint">Os convites novos entram nesta lista em qualquer celular ou computador. Esta página é só para vocês.</p>
+    <div id="confirmModal" class="modal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+            <p id="confirmTitle"></p>
+            <div class="actions">
+                <button type="button" class="secondary" id="confirmCancel">Cancelar</button>
+                <button type="button" id="confirmOk">Apagar</button>
+            </div>
+        </div>
+    </div>
     <script>
         const BASE = 'https://www.raphaelazanin.com.br/convite/';
         // Endereço /exec do app da Web publicado a partir de convite/planilha-convidados.gs
@@ -152,6 +181,38 @@
                 created = list.map((item) => ({ nome: item.nome, created: true }));
                 saveCreated();
                 return created.some((item) => slugify(item.nome) === slugify(nome));
+            });
+        }
+
+        function askToDelete(nome) {
+            const modal = document.getElementById('confirmModal');
+            const title = document.getElementById('confirmTitle');
+            const ok = document.getElementById('confirmOk');
+            const cancel = document.getElementById('confirmCancel');
+            title.textContent = `Apagar o convite de ${nome}?`;
+            modal.hidden = false;
+            ok.focus();
+            return new Promise((resolve) => {
+                function close(answer) {
+                    modal.hidden = true;
+                    ok.removeEventListener('click', onOk);
+                    cancel.removeEventListener('click', onCancel);
+                    modal.removeEventListener('click', onBackdrop);
+                    document.removeEventListener('keydown', onKey);
+                    resolve(answer);
+                }
+                function onOk() { close(true); }
+                function onCancel() { close(false); }
+                function onBackdrop(event) {
+                    if (event.target === modal) close(false);
+                }
+                function onKey(event) {
+                    if (event.key === 'Escape') close(false);
+                }
+                ok.addEventListener('click', onOk);
+                cancel.addEventListener('click', onCancel);
+                modal.addEventListener('click', onBackdrop);
+                document.addEventListener('keydown', onKey);
             });
         }
 
@@ -261,7 +322,7 @@
             const removeBtn = event.target.closest('button[data-delete]');
             if (removeBtn) {
                 const nome = removeBtn.dataset.delete;
-                if (!nome || !window.confirm(`Apagar o convite de ${nome}?`)) return;
+                if (!nome || !(await askToDelete(nome))) return;
                 if (!GUESTS_ENDPOINT) {
                     created = created.filter((item) => slugify(item.nome) !== slugify(nome));
                     saveCreated();
