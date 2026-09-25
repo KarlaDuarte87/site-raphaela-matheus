@@ -670,38 +670,45 @@
                     .replace(/^-|-$/g, '');
             }
 
-            function readSlug() {
+            function readPara() {
                 const params = new URLSearchParams(window.location.search);
                 const named = params.get('para') || params.get('c');
-                if (named) return slugify(named);
+                if (named) return named.trim();
                 const firstKey = [...params.keys()][0];
-                if (firstKey && params.get(firstKey) === '') return slugify(firstKey);
+                if (firstKey && params.get(firstKey) === '') return firstKey.trim();
                 return '';
             }
 
-            const slug = readSlug();
-            if (!slug) return;
+            function resolveName(raw, guests) {
+                const slug = slugify(raw);
+                if (!slug) return '';
+                const guest = guests.find((item) => slugify(item.slug || item.nome) === slug);
+                if (guest && guest.nome) return guest.nome;
+                return raw.replace(/\s+/g, ' ').slice(0, 80);
+            }
+
+            function applyName(nome) {
+                if (!nome) return;
+                const greeting = document.getElementById('guestGreeting');
+                const nameField = document.getElementById('rsvpNome');
+                const plural = /\se\s|&/i.test(nome);
+                if (greeting) {
+                    greeting.hidden = false;
+                    greeting.textContent = plural
+                        ? `${nome}, temos a alegria de convidar vocês para celebrar o nosso casamento.`
+                        : `${nome}, temos a alegria de convidar você para celebrar o nosso casamento.`;
+                }
+                if (nameField && !nameField.value) nameField.value = nome;
+                document.title = `Convite para ${nome} — Raphaela & Matheus`;
+            }
+
+            const raw = readPara();
+            if (!raw) return;
 
             fetch('convidados.json')
                 .then((res) => (res.ok ? res.json() : []))
-                .then((list) => {
-                    const guests = Array.isArray(list) ? list : [];
-                    const guest = guests.find((item) => slugify(item.slug || item.nome) === slug);
-                    if (!guest || !guest.nome) return;
-
-                    const greeting = document.getElementById('guestGreeting');
-                    const nameField = document.getElementById('rsvpNome');
-                    const plural = /\se\s|&/i.test(guest.nome);
-                    if (greeting) {
-                        greeting.hidden = false;
-                        greeting.textContent = plural
-                            ? `${guest.nome}, temos a alegria de convidar vocês para celebrar o nosso casamento.`
-                            : `${guest.nome}, temos a alegria de convidar você para celebrar o nosso casamento.`;
-                    }
-                    if (nameField && !nameField.value) nameField.value = guest.nome;
-                    document.title = `Convite para ${guest.nome} — Raphaela & Matheus`;
-                })
-                .catch(() => {});
+                .then((list) => applyName(resolveName(raw, Array.isArray(list) ? list : [])))
+                .catch(() => applyName(resolveName(raw, [])));
         })();
 
         const bgMusic = document.getElementById('bgMusic');
