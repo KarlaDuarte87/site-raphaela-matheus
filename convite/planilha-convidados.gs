@@ -1,7 +1,7 @@
 /**
  * Projeto novo, separado do script que recebe as confirmações.
- * Não apaga linhas, não altera abas existentes e não mexe nas confirmações.
- * Só cria a aba "Convites", se ela ainda não existir, e acrescenta nomes nela.
+ * Não altera a aba Confirmacoes nem as outras abas já existentes.
+ * Só cria a aba "Convites", se ela ainda não existir, e acrescenta ou remove nomes nela.
  *
  * SPREADSHEET_ID é o trecho entre /d/ e /edit no endereço da planilha.
  * Implantar como app da Web: executar como você, acesso "Qualquer pessoa".
@@ -61,6 +61,19 @@ function addGuest_(nome) {
   return { ok: true, nome: nome };
 }
 
+function deleteGuest_(nome) {
+  nome = String(nome || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+  var slug = slugify_(nome);
+  if (!slug) return { ok: false };
+  var sh = sheet_();
+  var values = sh.getDataRange().getValues();
+  for (var i = values.length - 1; i >= 1; i--) {
+    var rowName = String(values[i][0] || '').trim().replace(/\s+/g, ' ');
+    if (slugify_(rowName) === slug) sh.deleteRow(i + 1);
+  }
+  return { ok: true, nome: nome };
+}
+
 function doGet(e) {
   var callback = e && e.parameter ? e.parameter.callback : '';
   var body = JSON.stringify(listGuests_());
@@ -81,7 +94,8 @@ function doPost(e) {
   } catch (err) {
     data = {};
   }
+  var result = data.acao === 'apagar' ? deleteGuest_(data.nome) : addGuest_(data.nome);
   return ContentService
-    .createTextOutput(JSON.stringify(addGuest_(data.nome)))
+    .createTextOutput(JSON.stringify(result))
     .setMimeType(ContentService.MimeType.JSON);
 }

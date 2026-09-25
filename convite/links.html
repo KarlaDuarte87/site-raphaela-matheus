@@ -46,6 +46,14 @@
             background: transparent;
             color: #445b44;
         }
+        button.icon {
+            background: transparent;
+            color: #445b44;
+            border-color: transparent;
+            padding: 0.45rem;
+            line-height: 0;
+        }
+        button.icon svg { width: 1.15rem; height: 1.15rem; display: block; }
         ul { list-style: none; padding: 0; margin: 0; }
         li {
             border-top: 1px solid #e3ebe3;
@@ -147,6 +155,15 @@
             });
         }
 
+        function deleteShared(nome) {
+            return fetch(GUESTS_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ acao: 'apagar', nome })
+            }).then(() => loadShared());
+        }
+
         function inviteUrl(token) {
             return `${BASE}?para=${encodeURIComponent(token)}`;
         }
@@ -169,18 +186,26 @@
             });
         }
 
+        function trashIcon() {
+            return `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M8 7l1 13h6l1-13"/></svg>`;
+        }
+
         function render() {
             listEl.innerHTML = allGuests().map((guest) => {
                 const token = guest.created ? guest.nome : slugify(guest.slug || guest.nome);
                 const url = inviteUrl(token);
                 const message = messageFor(guest.nome, url);
                 const whatsapp = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                const remove = guest.created
+                    ? `<button type="button" class="icon" data-delete="${escapeHtml(guest.nome)}" aria-label="Apagar convite de ${escapeHtml(guest.nome)}">${trashIcon()}</button>`
+                    : '';
                 return `<li>
                     <strong>${escapeHtml(guest.nome)}</strong>
                     <a class="invite-link" href="${escapeHtml(url)}">${escapeHtml(url)}</a>
                     <div class="actions">
                         <a class="whatsapp" href="${escapeHtml(whatsapp)}" target="_blank" rel="noopener">Enviar no WhatsApp</a>
                         <button type="button" class="secondary" data-message="${escapeHtml(message)}">Copiar mensagem</button>
+                        ${remove}
                     </div>
                 </li>`;
             }).join('');
@@ -233,6 +258,33 @@
         });
 
         listEl.addEventListener('click', async (event) => {
+            const removeBtn = event.target.closest('button[data-delete]');
+            if (removeBtn) {
+                const nome = removeBtn.dataset.delete;
+                if (!nome || !window.confirm(`Apagar o convite de ${nome}?`)) return;
+                if (!GUESTS_ENDPOINT) {
+                    created = created.filter((item) => slugify(item.nome) !== slugify(nome));
+                    saveCreated();
+                    render();
+                    formStatus.textContent = `Convite de ${nome} apagado neste aparelho.`;
+                    return;
+                }
+                formStatus.textContent = 'Apagando...';
+                try {
+                    const list = await deleteShared(nome);
+                    if (!Array.isArray(list)) throw new Error('lista');
+                    const stillThere = list.some((item) => slugify(item.nome) === slugify(nome));
+                    created = list.map((item) => ({ nome: item.nome, created: true }));
+                    saveCreated();
+                    render();
+                    formStatus.textContent = stillThere
+                        ? 'Não consegui apagar. Publique a versão nova do script da planilha e tente de novo.'
+                        : `Convite de ${nome} apagado.`;
+                } catch {
+                    formStatus.textContent = 'Não consegui apagar o convite. Tente de novo.';
+                }
+                return;
+            }
             const btn = event.target.closest('button[data-message]');
             if (!btn) return;
             await navigator.clipboard.writeText(btn.dataset.message);
