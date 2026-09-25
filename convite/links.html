@@ -52,6 +52,7 @@
             padding: 1rem 0;
         }
         strong { display: block; font-size: 1.15rem; font-weight: 400; }
+        .invite-link { display: block; margin-top: 0.35rem; color: #445b44; word-break: break-all; font-size: 0.9rem; }
         .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; }
         #formStatus { min-height: 1.4rem; }
         .hint { font-size: 0.95rem; }
@@ -68,9 +69,11 @@
     <p id="formStatus" role="status"></p>
     <h2>Pessoas</h2>
     <ul id="list"></ul>
-    <p class="hint">Esta página é só para vocês. Não enviem este endereço para os convidados.</p>
+    <p class="hint">Os convites novos entram nesta lista em qualquer celular ou computador. Esta página é só para vocês.</p>
     <script>
         const BASE = 'https://www.raphaelazanin.com.br/convite/';
+        // Endereço /exec do app da Web publicado a partir de convite/planilha-convidados.gs
+        const GUESTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxxzOLNr3Zv9_51XVrOQF3hhbdGDo-bPetbkVn2Kv1ZpL8bBYuw2NgC7UTtUaQ2s1iu/exec';
         const STORAGE_KEY = 'convite-convidados-extra';
         const form = document.getElementById('newGuest');
         const nameInput = document.getElementById('guestName');
@@ -109,6 +112,41 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(created));
         }
 
+        function loadShared() {
+            if (!GUESTS_ENDPOINT) return Promise.resolve(null);
+            return new Promise((resolve, reject) => {
+                const callback = `conviteGuests_${Date.now()}`;
+                const script = document.createElement('script');
+                const timer = setTimeout(() => finish(new Error('timeout')), 12000);
+                function finish(err, data) {
+                    clearTimeout(timer);
+                    delete window[callback];
+                    script.remove();
+                    if (err) reject(err);
+                    else resolve(Array.isArray(data) ? data : []);
+                }
+                window[callback] = (data) => finish(null, data);
+                script.onerror = () => finish(new Error('script'));
+                script.src = `${GUESTS_ENDPOINT}?callback=${callback}`;
+                document.head.appendChild(script);
+            });
+        }
+
+        function saveShared(nome) {
+            if (!GUESTS_ENDPOINT) return Promise.resolve(false);
+            return fetch(GUESTS_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ nome })
+            }).then(() => loadShared()).then((list) => {
+                if (!list) return false;
+                created = list.map((item) => ({ nome: item.nome, created: true }));
+                saveCreated();
+                return created.some((item) => slugify(item.nome) === slugify(nome));
+            });
+        }
+
         function inviteUrl(token) {
             return `${BASE}?para=${encodeURIComponent(token)}`;
         }
@@ -139,6 +177,7 @@
                 const whatsapp = `https://wa.me/?text=${encodeURIComponent(message)}`;
                 return `<li>
                     <strong>${escapeHtml(guest.nome)}</strong>
+                    <a class="invite-link" href="${escapeHtml(url)}">${escapeHtml(url)}</a>
                     <div class="actions">
                         <a class="whatsapp" href="${escapeHtml(whatsapp)}" target="_blank" rel="noopener">Enviar no WhatsApp</a>
                         <button type="button" class="secondary" data-message="${escapeHtml(message)}">Copiar mensagem</button>
@@ -147,7 +186,7 @@
             }).join('');
         }
 
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
             const nome = nameInput.value.trim().replace(/\s+/g, ' ').slice(0, 80);
             if (!slugify(nome)) {
@@ -160,19 +199,38 @@
                 nameInput.value = '';
                 return;
             }
-            created.unshift({ nome, created: true });
-            saveCreated();
-            nameInput.value = '';
-            render();
-            formStatus.textContent = `Convite de ${nome} criado. Toque em Enviar no WhatsApp.`;
+            if (!GUESTS_ENDPOINT) {
+                created.unshift({ nome, created: true });
+                saveCreated();
+                nameInput.value = '';
+                render();
+                formStatus.textContent = 'Convite criado só neste aparelho. A lista compartilhada ainda não está ligada.';
+                return;
+            }
+            formStatus.textContent = 'Salvando na lista...';
+            try {
+                const saved = await saveShared(nome);
+                nameInput.value = '';
+                render();
+                formStatus.textContent = saved
+                    ? `Convite de ${nome} salvo. Ele aparece em qualquer aparelho.`
+                    : 'Não consegui confirmar o salvamento. Tente de novo.';
+            } catch {
+                formStatus.textContent = 'Não consegui salvar na lista compartilhada. Tente de novo.';
+            }
         });
 
-        fetch('convidados.json')
-            .then((res) => res.json())
-            .then((data) => {
-                published = Array.isArray(data) ? data : [];
-                render();
-            });
+        Promise.all([
+            fetch('convidados.json').then((res) => res.json()).catch(() => []),
+            loadShared().catch(() => null)
+        ]).then(([data, shared]) => {
+            published = Array.isArray(data) ? data : [];
+            if (Array.isArray(shared)) {
+                created = shared.map((item) => ({ nome: item.nome, created: true }));
+                saveCreated();
+            }
+            render();
+        });
 
         listEl.addEventListener('click', async (event) => {
             const btn = event.target.closest('button[data-message]');
