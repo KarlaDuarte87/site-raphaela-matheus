@@ -12,3 +12,5 @@ python3 -m http.server 8081
 Acesse http://localhost:8081
 
 O convite digital fica em `/convite/` (`http://localhost:8081/convite/`). A lista de nomes está em `convite/convidados.json`. Os links para enviar ficam em `convite/links.html` (uso interno).
+
+O desafio fotográfico fica em `/desafio/` (`http://localhost:8081/desafio/?mesa=01`). O álbum ao vivo é `/desafio/album.html`. Os cartões com QR, um por mesa, saem em `/desafio/cartoes.html`. As fotos vão para o Google Drive depois de publicar `desafio/desafio-fotos.gs` e colar a URL em `desafio/config.js`.

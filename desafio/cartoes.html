@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartões do desafio — Raphaela & Matheus</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css?v=8">
+</head>
+<body>
+    <header class="topbar no-print">
+        <div class="topbar-inner">
+            <a href="../index.html" aria-label="Site do casamento">
+                <img src="../assets/logo-nav.png" alt="Raphaela & Matheus" width="182" height="91">
+            </a>
+            <a class="nav-link" href="album.html">Álbum</a>
+        </div>
+    </header>
+
+    <section class="toolbar no-print">
+        <span class="kicker">Uso interno</span>
+        <h1>Cartões da festa</h1>
+        <div class="gold-line"></div>
+        <p class="lede">Cada mesa leva um cartão com cenas diferentes. O QR abre só a missão daquela mesa. Todas as fotos caem no mesmo álbum e ficam no Google Drive.</p>
+
+        <div class="album-qr">
+            <img src="qr/album.png" alt="QR code do álbum dos noivos" width="320" height="320">
+            <p><strong>Álbum dos noivos.</strong> Este QR não vai na mesa. É para abrir o catálogo ao vivo no celular de Raphaela e Matheus.</p>
+        </div>
+
+        <div class="row-actions">
+            <button type="button" class="btn" id="imprimir">Imprimir cartões</button>
+            <button type="button" class="btn btn-ghost" id="todas" style="border-color:#c5d5c5">Marcar todas</button>
+            <label class="check"><input type="checkbox" id="soMarcadas" checked> Imprimir só as marcadas</label>
+        </div>
+    </section>
+
+    <div class="print-stack" id="cartoes"></div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="cartoes.js?v=5"></script>
+</body>
+</html>

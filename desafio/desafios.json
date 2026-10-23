@@ -1,0 +1,488 @@
+{
+  "casal": "Raphaela e Matheus",
+  "data": "01 de novembro de 2026",
+  "urlBase": "https://www.raphaelazanin.com.br/desafio/",
+  "albumUrl": "https://www.raphaelazanin.com.br/desafio/album.html",
+  "mesas": [
+    {
+      "id": "01",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Os noivos dançando juntos"
+        },
+        {
+          "id": "02",
+          "titulo": "Um brinde em close"
+        },
+        {
+          "id": "03",
+          "titulo": "Alguém rindo de verdade"
+        },
+        {
+          "id": "04",
+          "titulo": "As alianças, bem de perto"
+        },
+        {
+          "id": "05",
+          "titulo": "A mesa vista de cima"
+        },
+        {
+          "id": "extra",
+          "titulo": "O flagra da mesa",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A pista cheia na primeira música"
+        },
+        {
+          "id": "02",
+          "titulo": "Um abraço apertado"
+        },
+        {
+          "id": "03",
+          "titulo": "O buquê em destaque"
+        },
+        {
+          "id": "04",
+          "titulo": "Uma criança na festa"
+        },
+        {
+          "id": "05",
+          "titulo": "O prato mais bonito"
+        },
+        {
+          "id": "extra",
+          "titulo": "Uma cena fora do roteiro",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Raphaela no meio da pista"
+        },
+        {
+          "id": "02",
+          "titulo": "Matheus no meio da pista"
+        },
+        {
+          "id": "03",
+          "titulo": "Os sapatos de quem dançou"
+        },
+        {
+          "id": "04",
+          "titulo": "Uma taça erguida"
+        },
+        {
+          "id": "05",
+          "titulo": "As flores da mesa"
+        },
+        {
+          "id": "extra",
+          "titulo": "A foto sem pose",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Um beijo dos noivos"
+        },
+        {
+          "id": "02",
+          "titulo": "Gerações diferentes juntas"
+        },
+        {
+          "id": "03",
+          "titulo": "Alguém emocionado"
+        },
+        {
+          "id": "04",
+          "titulo": "O terno, no detalhe"
+        },
+        {
+          "id": "05",
+          "titulo": "A decoração do salão"
+        },
+        {
+          "id": "extra",
+          "titulo": "O que quase passou batido",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "O corte do bolo"
+        },
+        {
+          "id": "02",
+          "titulo": "Um passo de dança inesperado"
+        },
+        {
+          "id": "03",
+          "titulo": "Os amigos reunidos"
+        },
+        {
+          "id": "04",
+          "titulo": "Uma selfie da mesa inteira"
+        },
+        {
+          "id": "05",
+          "titulo": "As velas acesas"
+        },
+        {
+          "id": "extra",
+          "titulo": "Um instante só de vocês",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A noiva rodando o vestido"
+        },
+        {
+          "id": "02",
+          "titulo": "Alguém cantando junto"
+        },
+        {
+          "id": "03",
+          "titulo": "O doce da festa"
+        },
+        {
+          "id": "04",
+          "titulo": "Mãos dadas"
+        },
+        {
+          "id": "05",
+          "titulo": "A pista lá do fundo"
+        },
+        {
+          "id": "extra",
+          "titulo": "A bagunça boa da mesa",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Os pais dançando"
+        },
+        {
+          "id": "02",
+          "titulo": "Um parabéns de coração"
+        },
+        {
+          "id": "03",
+          "titulo": "Luzes e brilho do salão"
+        },
+        {
+          "id": "04",
+          "titulo": "A mesa dos noivos"
+        },
+        {
+          "id": "05",
+          "titulo": "Uma careta feliz"
+        },
+        {
+          "id": "extra",
+          "titulo": "O sorriso que ninguém viu",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Os noivos entre os convidados"
+        },
+        {
+          "id": "02",
+          "titulo": "Duas taças se tocando"
+        },
+        {
+          "id": "03",
+          "titulo": "Um detalhe do vestido"
+        },
+        {
+          "id": "04",
+          "titulo": "Quem não sai da pista"
+        },
+        {
+          "id": "05",
+          "titulo": "O salão numa foto só"
+        },
+        {
+          "id": "extra",
+          "titulo": "A foto que conta a história",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A fila do buffet"
+        },
+        {
+          "id": "02",
+          "titulo": "Um abraço nos noivos"
+        },
+        {
+          "id": "03",
+          "titulo": "Criança dançando"
+        },
+        {
+          "id": "04",
+          "titulo": "O nome dos dois num detalhe"
+        },
+        {
+          "id": "05",
+          "titulo": "A gargalhada da mesa"
+        },
+        {
+          "id": "extra",
+          "titulo": "O detalhe no canto do quadro",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Uma coreografia improvisada"
+        },
+        {
+          "id": "02",
+          "titulo": "Os padrinhos juntos"
+        },
+        {
+          "id": "03",
+          "titulo": "Um olhar entre os noivos"
+        },
+        {
+          "id": "04",
+          "titulo": "Flores em close"
+        },
+        {
+          "id": "05",
+          "titulo": "Alguém filmando escondido"
+        },
+        {
+          "id": "extra",
+          "titulo": "Uma lembrança sem aviso",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A música lenta"
+        },
+        {
+          "id": "02",
+          "titulo": "Pista e sapatos no quadro"
+        },
+        {
+          "id": "03",
+          "titulo": "O brinde coletivo da mesa"
+        },
+        {
+          "id": "04",
+          "titulo": "Raphaela rindo"
+        },
+        {
+          "id": "05",
+          "titulo": "O bolo ainda inteiro"
+        },
+        {
+          "id": "extra",
+          "titulo": "O momento entre as músicas",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Matheus rindo"
+        },
+        {
+          "id": "02",
+          "titulo": "Quem puxou a mesa pra dançar"
+        },
+        {
+          "id": "03",
+          "titulo": "Um detalhe dourado"
+        },
+        {
+          "id": "04",
+          "titulo": "Amigos de longa data"
+        },
+        {
+          "id": "05",
+          "titulo": "Uma foto torta de propósito"
+        },
+        {
+          "id": "extra",
+          "titulo": "A cara de quem está feliz",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A mesa inteira num quadro"
+        },
+        {
+          "id": "02",
+          "titulo": "Os noivos indo a outra mesa"
+        },
+        {
+          "id": "03",
+          "titulo": "A música que levantou a pista"
+        },
+        {
+          "id": "04",
+          "titulo": "Alguém repetindo a sobremesa"
+        },
+        {
+          "id": "05",
+          "titulo": "As luzes do salão"
+        },
+        {
+          "id": "extra",
+          "titulo": "O que a mesa decidiu guardar",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "O buquê lá no alto"
+        },
+        {
+          "id": "02",
+          "titulo": "Casais dançando em volta"
+        },
+        {
+          "id": "03",
+          "titulo": "Um parabéns bem dito"
+        },
+        {
+          "id": "04",
+          "titulo": "O menu ou o guardanapo"
+        },
+        {
+          "id": "05",
+          "titulo": "A festa dentro de um copo"
+        },
+        {
+          "id": "extra",
+          "titulo": "Uma cena miúda e bonita",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Os noivos cansados e felizes"
+        },
+        {
+          "id": "02",
+          "titulo": "Um último brinde"
+        },
+        {
+          "id": "03",
+          "titulo": "A mesa já à vontade"
+        },
+        {
+          "id": "04",
+          "titulo": "Alguém descalço"
+        },
+        {
+          "id": "05",
+          "titulo": "A foto que resume a noite"
+        },
+        {
+          "id": "extra",
+          "titulo": "O último flagra da noite",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A pista com a luz baixa"
+        },
+        {
+          "id": "02",
+          "titulo": "Um convite para dançar"
+        },
+        {
+          "id": "03",
+          "titulo": "Os noivos brindando com a mesa"
+        },
+        {
+          "id": "04",
+          "titulo": "Um detalhe quase escondido"
+        },
+        {
+          "id": "05",
+          "titulo": "Vocês, felizes, sem pose"
+        },
+        {
+          "id": "extra",
+          "titulo": "Aquilo que só esta mesa viu",
+          "livre": true
+        }
+      ]
+    }
+  ]
+}
