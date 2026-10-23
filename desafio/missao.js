@@ -17,12 +17,15 @@
         capturando: false,
         publicacao: null,
         shareMsg: '',
-        shareLink: ''
+        shareLink: '',
+        escaneando: false
     };
 
     let stream = null;
+    let leitura = 0;
 
     function pararCamera() {
+        leitura += 1;
         if (stream) {
             stream.getTracks().forEach((track) => track.stop());
             stream = null;
@@ -300,13 +303,146 @@
             <a class="linkish" href="album.html?mesa=${D.esc(state.mesa.id)}">Ver o álbum</a>`;
     }
 
+    function iconeEscanear() {
+        return `<svg class="scan-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <path d="M7 3H5a2 2 0 0 0-2 2v2" stroke-linecap="round"/>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2" stroke-linecap="round"/>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2" stroke-linecap="round"/>
+            <path d="M3 17v2a2 2 0 0 0 2 2h2" stroke-linecap="round"/>
+            <path d="M4 12h16" stroke-linecap="round"/>
+        </svg>`;
+    }
+
+    function mesaDoQr(valor) {
+        if (!valor || !state.data) return '';
+        let mesa = '';
+        try {
+            mesa = new URL(valor, location.href).searchParams.get('mesa') || '';
+        } catch (err) {
+            return '';
+        }
+        const id = mesa.trim();
+        const achada = state.data.mesas.find((item) => item.id === id || item.id === id.padStart(2, '0'));
+        return achada ? achada.id : '';
+    }
+
+    function irParaMesa(mesa) {
+        leitura += 1;
+        pararCamera();
+        state.escaneando = false;
+        location.href = location.pathname + '?mesa=' + encodeURIComponent(mesa);
+    }
+
+    function lerQuadro(video) {
+        if (!video.videoWidth || typeof jsQR !== 'function') return '';
+        const maximo = 480;
+        const escala = Math.min(1, maximo / Math.max(video.videoWidth, video.videoHeight));
+        const largura = Math.max(1, Math.round(video.videoWidth * escala));
+        const altura = Math.max(1, Math.round(video.videoHeight * escala));
+        const quadro = lerQuadro.canvas || (lerQuadro.canvas = document.createElement('canvas'));
+        if (quadro.width !== largura) quadro.width = largura;
+        if (quadro.height !== altura) quadro.height = altura;
+        const ctx = quadro.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(video, 0, 0, largura, altura);
+        const pixels = ctx.getImageData(0, 0, largura, altura);
+        const code = jsQR(pixels.data, largura, altura, { inversionAttempts: 'dontInvert' });
+        return code && code.data ? code.data : '';
+    }
+
+    async function lerQr() {
+        const atual = ++leitura;
+        const video = document.getElementById('cameraVideo');
+        let detector = null;
+        if ('BarcodeDetector' in window) {
+            try { detector = new BarcodeDetector({ formats: ['qr_code'] }); } catch (err) { detector = null; }
+        }
+        const passo = async () => {
+            if (atual !== leitura || !state.escaneando) return;
+            let outro = false;
+            if (video && video.readyState >= 2) {
+                try {
+                    if (detector) {
+                        const codes = await detector.detect(video);
+                        const mesa = codes.map((code) => mesaDoQr(code.rawValue)).find(Boolean);
+                        if (mesa) {
+                            irParaMesa(mesa);
+                            return;
+                        }
+                        outro = codes.length > 0;
+                    } else {
+                        const lido = lerQuadro(video);
+                        const mesa = mesaDoQr(lido);
+                        if (mesa) {
+                            irParaMesa(mesa);
+                            return;
+                        }
+                        outro = !!lido;
+                    }
+                } catch (err) {
+                    /* o próximo quadro tenta de novo */
+                }
+            }
+            if (outro) {
+                state.erro = 'Esse QR não é de uma mesa. Aponte para o cartão da sua mesa.';
+                const nota = document.querySelector('#app .note');
+                if (nota) nota.textContent = state.erro;
+            }
+            if (atual === leitura) setTimeout(passo, 320);
+        };
+        passo();
+    }
+
+    async function ligarEscaneamento() {
+        if (!window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            state.erro = 'Para escanear, abra esta página no celular, pelo Chrome ou Safari.';
+            renderVazio();
+            return;
+        }
+        if (!('BarcodeDetector' in window) && typeof jsQR !== 'function') {
+            state.erro = 'Este navegador não lê o QR aqui. Aponte a câmera do celular para o cartão da mesa.';
+            renderVazio();
+            return;
+        }
+        state.facing = 'environment';
+        const anterior = stream;
+        try {
+            const novo = await pedirStream();
+            if (anterior && anterior !== novo) {
+                anterior.getTracks().forEach((track) => track.stop());
+            }
+            stream = novo;
+            state.camera = true;
+            state.escaneando = true;
+            state.erro = '';
+            renderVazio();
+            encaixarCamera();
+            lerQr();
+        } catch (err) {
+            state.escaneando = false;
+            state.erro = err && (err.name === 'NotAllowedError' || err.name === 'SecurityError')
+                ? 'Para escanear, permita o acesso à câmera quando o celular pedir.'
+                : 'Não foi possível abrir a câmera. Aponte a câmera do celular para o QR do cartão.';
+            renderVazio();
+        }
+    }
+
     function renderVazio() {
+        const camera = state.escaneando ? `
+            <div class="scan-stage">
+                <video id="cameraVideo" autoplay muted playsinline></video>
+                <div class="scan-frame" aria-hidden="true"></div>
+            </div>
+            <p class="scan-hint">Aponte para o QR da mesa</p>
+            <button type="button" class="linkish" data-action="fechar-escanear">Fechar</button>` : `
+            <button type="button" class="btn btn-scan" data-action="escanear">${iconeEscanear()}Escanear</button>`;
         app.innerHTML = `
             <span class="kicker">Desafio fotográfico</span>
             <h1 class="display">Sua missão</h1>
             <div class="gold-line"></div>
             <p class="lede">Escaneie o cartão da sua mesa para ver as cenas. Cada mesa tem um desafio diferente.</p>
-            <a class="btn" href="album.html">Ver o álbum</a>`;
+            ${camera}
+            ${state.erro ? `<p class="note">${D.esc(state.erro)}</p>` : ''}
+            <a class="btn btn-ghost" href="album.html">Ver o álbum</a>`;
     }
 
     function render() {
@@ -322,7 +458,17 @@
 
     app.addEventListener('click', (event) => {
         const alvo = event.target.closest('[data-action]');
-        if (!alvo || !state.mesa) return;
+        if (!alvo) return;
+        if (!state.mesa) {
+            if (alvo.dataset.action === 'escanear') ligarEscaneamento();
+            if (alvo.dataset.action === 'fechar-escanear') {
+                state.escaneando = false;
+                state.erro = '';
+                pararCamera();
+                renderVazio();
+            }
+            return;
+        }
         const acao = alvo.dataset.action;
         if (acao === 'lista') abrir('lista');
         if (acao === 'abrir') abrir('captura', alvo.dataset.id);

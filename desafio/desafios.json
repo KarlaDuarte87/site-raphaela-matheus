@@ -483,6 +483,126 @@
           "livre": true
         }
       ]
+    },
+    {
+      "id": "17",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "O primeiro passo na pista"
+        },
+        {
+          "id": "02",
+          "titulo": "Um brinde entre amigos"
+        },
+        {
+          "id": "03",
+          "titulo": "O vestido em movimento"
+        },
+        {
+          "id": "04",
+          "titulo": "A cadeira de quem foi dançar"
+        },
+        {
+          "id": "05",
+          "titulo": "Vocês dois no meio da gente"
+        },
+        {
+          "id": "extra",
+          "titulo": "O flagra que a mesa vai contar",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "A entrada dos noivos"
+        },
+        {
+          "id": "02",
+          "titulo": "Alguém pedindo a música"
+        },
+        {
+          "id": "03",
+          "titulo": "O anel no detalhe"
+        },
+        {
+          "id": "04",
+          "titulo": "Uma conversa animada"
+        },
+        {
+          "id": "05",
+          "titulo": "O salão visto da mesa"
+        },
+        {
+          "id": "extra",
+          "titulo": "A foto que só vocês perceberam",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "Os noivos chegando na mesa"
+        },
+        {
+          "id": "02",
+          "titulo": "Uma taça no alto"
+        },
+        {
+          "id": "03",
+          "titulo": "O arranjo bem de perto"
+        },
+        {
+          "id": "04",
+          "titulo": "Quem puxou o coro"
+        },
+        {
+          "id": "05",
+          "titulo": "A pista lá da mesa"
+        },
+        {
+          "id": "extra",
+          "titulo": "O instante que quase escapou",
+          "livre": true
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "desafios": [
+        {
+          "id": "01",
+          "titulo": "O último giro da noite"
+        },
+        {
+          "id": "02",
+          "titulo": "Mãos levantadas na música"
+        },
+        {
+          "id": "03",
+          "titulo": "Um sorriso de canto"
+        },
+        {
+          "id": "04",
+          "titulo": "O detalhe do sapato"
+        },
+        {
+          "id": "05",
+          "titulo": "A mesa reunida de novo"
+        },
+        {
+          "id": "extra",
+          "titulo": "A lembrança desta mesa",
+          "livre": true
+        }
+      ]
     }
   ]
 }

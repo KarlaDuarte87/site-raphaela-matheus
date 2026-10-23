@@ -25,6 +25,18 @@ body::-webkit-scrollbar { display: none; }
 h1, h2, h3, .font-serif { font-family: "Cormorant Garamond", serif; }
 .font-script { font-family: "Great Vibes", cursive; }
 
+a,
+a:hover,
+a:focus,
+a:active,
+button,
+.btn,
+.btn-ghost,
+.linkish,
+.nav-link {
+    text-decoration: none;
+}
+
 .topbar {
     position: sticky;
     top: 0;
@@ -50,8 +62,18 @@ h1, h2, h3, .font-serif { font-family: "Cormorant Garamond", serif; }
 .topbar a.nav-link {
     letter-spacing: 0.16em;
     text-transform: uppercase;
+    text-decoration: none;
     font-size: 0.68rem;
     color: #374937;
+}
+.topbar a.nav-link.nav-script {
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 400;
 }
 .topbar a.nav-link:hover { color: #c5a059; }
 
@@ -349,8 +371,60 @@ h1, h2, h3, .font-serif { font-family: "Cormorant Garamond", serif; }
     font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btn:hover,
+.btn:focus,
+.btn:active { text-decoration: none; }
+.btn-scan { gap: 0.55rem; }
+.btn-scan .scan-icon { flex: none; }
+.scan-stage {
+    position: relative;
+    margin-top: 1.35rem;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: #1c241c;
+}
+.scan-stage video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: #111;
+}
+.scan-frame {
+    position: absolute;
+    inset: 16%;
+    pointer-events: none;
+    background:
+        linear-gradient(#fff, #fff) left top / 28px 2px no-repeat,
+        linear-gradient(#fff, #fff) left top / 2px 28px no-repeat,
+        linear-gradient(#fff, #fff) right top / 28px 2px no-repeat,
+        linear-gradient(#fff, #fff) right top / 2px 28px no-repeat,
+        linear-gradient(#fff, #fff) left bottom / 28px 2px no-repeat,
+        linear-gradient(#fff, #fff) left bottom / 2px 28px no-repeat,
+        linear-gradient(#fff, #fff) right bottom / 28px 2px no-repeat,
+        linear-gradient(#fff, #fff) right bottom / 2px 28px no-repeat;
+}
+.scan-frame::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 50%;
+    height: 2px;
+    background: #c5a059;
+    box-shadow: 0 0 12px rgba(197, 160, 89, 0.85);
+}
+.scan-hint {
+    margin-top: 0.85rem;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #587458;
 }
 .btn:hover { background: #374937; border-color: #374937; }
 .btn:disabled { opacity: 0.55; cursor: wait; }
@@ -366,9 +440,15 @@ h1, h2, h3, .font-serif { font-family: "Cormorant Garamond", serif; }
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    text-decoration: none;
     color: #587458;
 }
-.linkish:hover { color: #c5a059; }
+.linkish:hover,
+.linkish:focus,
+.linkish:active {
+    color: #c5a059;
+    text-decoration: none;
+}
 
 .note {
     margin-top: 0.8rem;
@@ -634,19 +714,30 @@ h1, h2, h3, .font-serif { font-family: "Cormorant Garamond", serif; }
     background: transparent;
     color: inherit;
     font: inherit;
-    font-size: 0.92rem;
+    font-weight: 300;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
     text-align: left;
     cursor: pointer;
 }
 .ranking button span:first-child {
     font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    letter-spacing: 0;
     color: #c5a059;
-    font-size: 1.25rem;
+    font-size: 0.9rem;
+}
+.ranking button strong {
+    font-family: inherit;
+    font-weight: 300;
+    font-size: inherit;
+    color: #2d3b2d;
 }
 .ranking button em {
     font-style: normal;
+    font-weight: 300;
     color: #759375;
-    font-size: 0.78rem;
+    font-size: inherit;
 }
 
 .lightbox {
