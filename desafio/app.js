@@ -194,18 +194,95 @@
         });
     }
 
+    function abrirBitmap(origem) {
+        return createImageBitmap(origem, { imageOrientation: 'from-image' }).catch(() => createImageBitmap(origem));
+    }
+
+    function areaSemFaixa(canvas) {
+        const w = canvas.width;
+        const h = canvas.height;
+        if (w < 8 || h < 8) return null;
+        let pixels;
+        try {
+            pixels = canvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
+        } catch (err) {
+            return null;
+        }
+        const escuro = (x, y) => {
+            const i = (y * w + x) * 4;
+            return pixels[i] <= 12 && pixels[i + 1] <= 12 && pixels[i + 2] <= 12;
+        };
+        const linhaPreta = (y) => {
+            for (let x = 0; x < w; x += 1) if (!escuro(x, y)) return false;
+            return true;
+        };
+        const colunaPreta = (x) => {
+            for (let y = 0; y < h; y += 1) if (!escuro(x, y)) return false;
+            return true;
+        };
+        let top = 0;
+        while (top < h - 1 && linhaPreta(top)) top += 1;
+        let bottom = h - 1;
+        while (bottom > top && linhaPreta(bottom)) bottom -= 1;
+        let left = 0;
+        while (left < w - 1 && colunaPreta(left)) left += 1;
+        let right = w - 1;
+        while (right > left && colunaPreta(right)) right -= 1;
+        const width = right - left + 1;
+        const height = bottom - top + 1;
+        if (width < w * 0.4 || height < h * 0.4) return null;
+        if ((w - width) / w < 0.08 && (h - height) / h < 0.08) return null;
+        return { left, top, width, height };
+    }
+
+    function aplicarFaixa(canvas) {
+        const area = areaSemFaixa(canvas);
+        if (!area) return canvas;
+        const saida = document.createElement('canvas');
+        saida.width = area.width;
+        saida.height = area.height;
+        saida.getContext('2d').drawImage(canvas, area.left, area.top, area.width, area.height, 0, 0, area.width, area.height);
+        return saida;
+    }
+
     async function compress(file, maxSize, quality) {
-        const bitmap = await createImageBitmap(file);
+        const bitmap = await abrirBitmap(file);
         const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
         const canvas = document.createElement('canvas');
         canvas.width = Math.max(1, Math.round(bitmap.width * scale));
         canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-        canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
         if (bitmap.close) bitmap.close();
-        const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+        const enquadrado = aplicarFaixa(canvas);
+        const blob = await new Promise((resolve) => enquadrado.toBlob(resolve, 'image/jpeg', quality));
         if (!blob) throw new Error('ler');
         const dataUrl = await blobToDataUrl(blob);
         return { dataUrl, base64: String(dataUrl).split(',')[1] || '' };
+    }
+
+    async function enquadrarBlob(blob) {
+        const bitmap = await abrirBitmap(blob);
+        const canvas = document.createElement('canvas');
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+        canvas.getContext('2d', { willReadFrequently: true }).drawImage(bitmap, 0, 0);
+        if (bitmap.close) bitmap.close();
+        const saida = aplicarFaixa(canvas);
+        if (saida === canvas) return null;
+        return new Promise((resolve) => saida.toBlob(resolve, 'image/jpeg', 0.92));
+    }
+
+    async function enquadrarUrl(src) {
+        try {
+            const response = await fetch(src);
+            if (!response.ok) return null;
+            const blob = await response.blob();
+            const saida = await enquadrarBlob(blob);
+            return saida ? URL.createObjectURL(saida) : null;
+        } catch (err) {
+            return null;
+        }
     }
 
     async function lerFoto(file) {
@@ -367,7 +444,9 @@
             if (!response.ok) return null;
             const blob = await response.blob();
             if (!String(blob.type || '').startsWith('image/')) return null;
-            return new File([blob], 'raphaela-e-matheus.jpg', { type: blob.type || 'image/jpeg' });
+            const saida = await enquadrarBlob(blob);
+            if (!saida) return new File([blob], 'raphaela-e-matheus.jpg', { type: blob.type || 'image/jpeg' });
+            return new File([saida], 'raphaela-e-matheus.jpg', { type: 'image/jpeg' });
         } catch (err) {
             return null;
         }
@@ -437,6 +516,7 @@
         curtir,
         minhas,
         publicar,
-        fraseMarcas
+        fraseMarcas,
+        enquadrarUrl
     };
 })();

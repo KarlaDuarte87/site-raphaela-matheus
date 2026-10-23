@@ -15,6 +15,50 @@
         pendentes: new Set()
     };
 
+    const recortes = new Map();
+    const emCurso = new Map();
+
+    function origem(foto) {
+        return D.safeSrc(foto.url) || D.safeSrc(foto.thumb) || '';
+    }
+
+    function srcVisivel(foto) {
+        const cache = recortes.get(foto.id);
+        return cache || origem(foto);
+    }
+
+    async function aplicarEnquadramento(img) {
+        const id = img && img.dataset.foto;
+        const src = img && img.dataset.origem;
+        if (!id || !src) return;
+        if (recortes.has(id)) {
+            const cache = recortes.get(id);
+            if (cache) document.querySelectorAll('[data-foto="' + id + '"]').forEach((el) => {
+                if (el.src !== cache) el.src = cache;
+            });
+            return;
+        }
+        if (!emCurso.has(id)) {
+            const tarefa = D.enquadrarUrl(src).then((url) => {
+                recortes.set(id, url || '');
+                return url || '';
+            }).catch(() => {
+                recortes.set(id, '');
+                return '';
+            }).finally(() => emCurso.delete(id));
+            emCurso.set(id, tarefa);
+        }
+        const url = await emCurso.get(id);
+        if (!url) return;
+        document.querySelectorAll('[data-foto="' + id + '"]').forEach((el) => {
+            if (el.src !== url) el.src = url;
+        });
+    }
+
+    function observarFotos(raiz) {
+        raiz.querySelectorAll('img[data-foto]').forEach((img) => aplicarEnquadramento(img));
+    }
+
     const mesaQuery = D.mesaFromQuery();
     if (mesaQuery && missaoLink) missaoLink.href = 'index.html?mesa=' + mesaQuery;
 
@@ -69,12 +113,12 @@
             : '<p class="banner">Modo de ensaio neste celular. Quando o Google Drive estiver ligado, as fotos de todos os convidados aparecem aqui.</p>';
         const grade = fotos.length
             ? `<div class="gallery">${fotos.map((foto, index) => {
-                const src = D.safeSrc(foto.url) || D.safeSrc(foto.thumb);
+                const src = srcVisivel(foto);
                 const nova = !state.primeira && !state.conhecidas.has(foto.id);
                 return `
                     <article class="shot${nova ? ' is-new' : ''}">
                         <button type="button" class="shot-open" data-index="${index}">
-                            <img src="${src}" alt="${D.esc(foto.desafioTitulo || 'Foto da festa')}" ${foto.thumb ? `data-fallback="${D.esc(D.safeSrc(foto.thumb))}"` : ''} loading="lazy" decoding="async">
+                            <img src="${D.esc(src)}" data-foto="${D.esc(foto.id)}" data-origem="${D.esc(origem(foto))}" alt="${D.esc(foto.desafioTitulo || 'Foto da festa')}" ${foto.thumb ? `data-fallback="${D.esc(D.safeSrc(foto.thumb))}"` : ''} loading="lazy" decoding="async">
                             <span class="shot-copy">
                                 <h3>${D.esc(foto.desafioTitulo || 'Cena da festa')}</h3>
                                 <p>${D.esc(meta(foto))}</p>
@@ -109,6 +153,7 @@
 
         state.conhecidas = new Set(state.fotos.map((foto) => foto.id));
         state.primeira = false;
+        observarFotos(app);
     }
 
     function abrirLightbox(index) {
@@ -117,8 +162,13 @@
         state.indice = (index + fotos.length) % fotos.length;
         const foto = fotos[state.indice];
         const img = document.getElementById('lightboxImg');
-        img.src = D.safeSrc(foto.url) || D.safeSrc(foto.thumb);
+        const pronta = recortes.get(foto.id);
+        img.dataset.foto = foto.id;
+        img.dataset.origem = origem(foto);
         img.alt = foto.desafioTitulo || 'Foto da festa';
+        img.removeAttribute('crossorigin');
+        img.src = pronta || origem(foto);
+        aplicarEnquadramento(img);
         document.getElementById('lightboxTitulo').textContent = foto.desafioTitulo || 'Cena da festa';
         document.getElementById('lightboxMeta').textContent = meta(foto);
         const aviso = document.getElementById('lightboxShare');
@@ -152,9 +202,9 @@
         if (shot) abrirLightbox(Number(shot.dataset.index));
     });
 
-    app.addEventListener('error', (event) => {
+    document.addEventListener('error', (event) => {
         const img = event.target;
-        if (!(img instanceof HTMLImageElement)) return;
+        if (!(img instanceof HTMLImageElement) || !img.dataset.foto) return;
         const fallback = img.dataset.fallback;
         if (fallback && img.src !== fallback) img.src = fallback;
     }, true);

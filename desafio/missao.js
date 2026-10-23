@@ -43,7 +43,7 @@
 
     async function pedirStream() {
         const tentativas = [
-            { audio: false, video: { facingMode: { ideal: state.facing }, width: { ideal: 1600 }, height: { ideal: 1200 } } },
+            { audio: false, video: { facingMode: { ideal: state.facing }, width: { ideal: 1200 }, height: { ideal: 1600 } } },
             { audio: false, video: { facingMode: state.facing } },
             { audio: false, video: true }
         ];
@@ -105,15 +105,30 @@
             return;
         }
         state.capturando = true;
+        const vw = video.videoWidth;
+        const vh = video.videoHeight;
+        const proporcao = 3 / 4;
+        const atual = vw / vh;
+        let sx = 0;
+        let sy = 0;
+        let sw = vw;
+        let sh = vh;
+        if (atual > proporcao) {
+            sw = vh * proporcao;
+            sx = (vw - sw) / 2;
+        } else {
+            sh = vw / proporcao;
+            sy = (vh - sh) / 2;
+        }
         const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.width = Math.max(1, Math.round(sw));
+        canvas.height = Math.max(1, Math.round(sh));
         const ctx = canvas.getContext('2d');
         if (state.facing === 'user') {
             ctx.translate(canvas.width, 0);
             ctx.scale(-1, 1);
         }
-        ctx.drawImage(video, 0, 0);
+        ctx.drawImage(video, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
         const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92));
         state.capturando = false;
         if (!blob) {
@@ -247,9 +262,6 @@
                 </div>
                 ${state.erro ? `<p class="note">${D.esc(state.erro)}</p>` : ''}
                 <button class="btn" type="submit" ${state.enviando || !state.foto ? 'disabled' : ''}>${state.enviando ? 'Enviando…' : 'Enviar'}</button>
-                ${state.foto ? '<button type="button" class="btn btn-ghost" data-action="compartilhar">Compartilhar</button><p class="share-apps">Instagram · WhatsApp · Facebook</p>' : ''}
-                ${state.foto ? `<p class="share-status">${D.esc(state.shareMsg)}</p>` : ''}
-                ${state.foto && state.shareLink ? `<a class="linkish" href="${D.esc(state.shareLink)}" target="_blank" rel="noopener">Abrir no WhatsApp</a>` : ''}
             </form>`;
     }
 
@@ -333,16 +345,9 @@
     });
 
     async function compartilharAgora() {
-        if (state.compartilhando) return;
-        const form = document.getElementById('envio');
-        const base = state.foto
-            ? {
-                dataUrl: state.foto.dataUrl,
-                titulo: cenaAtiva() ? cenaAtiva().titulo : '',
-                legenda: form && form.legenda ? form.legenda.value : ''
-            }
-            : state.publicacao;
-        if (!base || !(base.dataUrl || base.url)) return;
+        if (state.compartilhando || state.view !== 'sucesso' || !state.publicacao) return;
+        const base = state.publicacao;
+        if (!(base.dataUrl || base.url)) return;
         state.compartilhando = true;
         const status = document.querySelector('.share-status');
         if (status) status.textContent = 'Preparando a foto…';
@@ -360,28 +365,7 @@
             state.shareLink = '';
         }
         state.compartilhando = false;
-        if (state.view === 'sucesso') render();
-        else atualizarAviso();
-    }
-
-    function atualizarAviso() {
-        let status = document.querySelector('#envio .share-status');
-        if (!status) return;
-        status.textContent = state.shareMsg;
-        let link = document.querySelector('#envio a.linkish[target]');
-        if (state.shareLink) {
-            if (!link) {
-                link = document.createElement('a');
-                link.className = 'linkish';
-                link.target = '_blank';
-                link.rel = 'noopener';
-                link.textContent = 'Abrir no WhatsApp';
-                status.insertAdjacentElement('afterend', link);
-            }
-            link.href = state.shareLink;
-        } else if (link) {
-            link.remove();
-        }
+        render();
     }
 
     app.addEventListener('change', async (event) => {
